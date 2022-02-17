@@ -1,0 +1,341 @@
+$background-color: #FFFFFF;
+$font-color: #000000;
+$primary-color:#276678;
+$shadow-color: #DEDEDE;
+$delete-color:#FF6363;
+$font-base: 'Nanum Gothic', sans-serif;
+$font-h2: 'Bungee Shade', cursive;
+$font-p:'Nanum Myeongjo', serif;
+$font-nav:'Song Myung', serif;
+*, ::after, ::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html{
+  background: $background-color;
+  text-align: center;
+  font-size: 1.8vw;
+  font-family: $font-base;
+  color: $font-color;
+
+  @media screen and (min-width: 760px) {
+    font-size: 1vw;
+  }
+  @media screen and (min-width: 1170px) {
+    font-size: 10px;
+  }
+}
+@mixin custom-button($hover-color:$primary-color){
+  background-color: $background-color;
+  color: $primary-color;
+  padding: 1rem;
+  border-radius: 5%;
+  border: 0.1rem solid;
+  &:hover{
+    background-color: $hover-color;
+    color: $background-color;
+    border-color: $hover-color;
+  }
+}
+
+h2{
+  display: block;
+  width: 100%;
+  color: $primary-color;
+  font-weight:bold;
+  font-size: 6rem;
+  font-family: $font-h2;
+  text-align: center;
+  @media screen and (min-width: 1170px) {
+    text-align: left;
+  }
+}
+li {
+  line-height: 1.5;
+  padding-bottom: 1.6rem;
+  font-size: 1.6rem;
+  text-align: center;
+  font-family: $font-p;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+  padding: 0.2rem 0.1rem 0.1rem 0.1rem;
+  &:hover{
+    color: $primary-color;
+    background: $background-color;
+  }
+  &:active{
+    font-weight: bold;
+  }
+}
+
+.nav-container{
+  position: sticky;
+  top:0; left:0;
+  z-index: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  padding:1.5rem 2rem 0 2rem;
+  margin: 0 auto;
+  background:$background-color;
+  @media screen and (min-width: 1170px) {
+    width: 117rem;
+    height: 8rem;
+    padding-bottom: 3.5rem;
+  }
+  ul{
+    display:flex;
+    list-style: none;
+  }
+  li{
+    display: list-item;
+    margin-left: 2rem;
+    background: $background-color;
+    font: bold 25px $font-nav;
+  }
+}
+
+.main-container{
+  z-index: 0;
+  padding: 0 2rem 0 2rem;
+  margin:2rem auto 0 auto;
+  background: $background-color;
+  @media screen and (min-width: 760px) {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    background: $background-color;
+    @media screen and (min-width: 1170px) {
+      width: 117rem;
+      grid-column-gap: 3rem;
+      grid-row-gap: 7rem;
+      grid-template-columns: 33rem 77rem;
+    }
+  }
+  .logo {
+    text-align: left;
+    margin: 0 0 6rem 0;
+    @media screen and (min-width: 760px) {
+      grid-column: 1/3;
+      grid-row: 1;
+      @media screen and (min-width: 1170px) {
+        grid-column: 1;
+        height: 330px;
+      }
+    }
+  }
+  .ranking-container{
+    height: 45vh;
+    overflow-y: auto;
+    padding: 0 1rem;
+    box-shadow: 0 0 0.5rem 0.1rem $shadow-color;
+    @media screen and (min-width: 760px) {
+      grid-column: 2;
+      grid-row: 2;
+      margin: 7rem 0 0 1rem;
+      height: 60vh;
+      @media screen and (min-width: 1170px) {
+        grid-row: 1/3;
+        height: 90rem;
+        margin: 0;
+      }
+    }
+    .toolbar{
+      width: 100%;
+      padding: 2rem 2rem 0 0;
+      font-size: 1.5rem;
+      @media screen and (min-width: 760px) {
+        height: 7rem;
+      }
+      @media screen and (min-width: 1170px) {
+        height: 10rem;
+        padding: 3rem 3rem 0 0;
+        font-size: 1.4rem;
+      }
+      .add-user{
+        @include custom-button;
+        float: right;
+        margin-left: 3rem;
+        border-right: $background-color;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .delete-user{
+        @include custom-button($delete-color);
+        float: right;
+        border-top-left-radius:0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    .ranking{
+      table{
+        width:100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+      thead{
+        font-size: 1.4rem;
+        font-weight: bold;
+        color:$primary-color;
+      }
+      tbody{
+        font-size: 1.4rem;
+      }
+      td, th{
+        padding: 0.5rem;
+      }
+      a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      img{
+        display: block;
+        width: 3rem;
+        height: 3rem;
+        margin: 0.5rem ;
+        vertical-align: middle;
+        border-radius: 50%;
+        box-shadow: 0 0 0.5rem 0.1rem $shadow-color;
+      }
+      #top-rank{
+        font-family: $font-h2;
+        color: $primary-color;
+        font-size:1.5rem;
+      }
+      @media screen and (min-width: 760px) {
+        thead, tbody{
+          font-size: 1.3rem;
+        }
+        a, img{
+          display: inline;
+        }
+        @media screen and (min-width: 1170px) {
+          thead{
+            font-size: 1.6rem;
+          }
+          tbody{
+            font-size: 1.4rem;
+          }
+          td, th{
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  .rules{
+    text-align:left;
+    padding-top: 7rem;
+    h2{
+      margin-bottom: 1rem;
+    }
+    ol{
+      list-style-position: inside;
+    }
+    li{
+      text-align: center;
+    }
+    @media screen and (min-width: 760px) {
+      grid-column: 1;
+      grid-row: 2;
+      h2, li{
+        text-align: left;
+      }
+    }
+  }
+  .statistics{
+    padding-top: 7rem;
+    .fine {
+      padding-top: 7rem;
+    }
+    img{
+      display: block;
+      width: 70%;
+      padding-top: 4rem;
+      margin: auto;
+    }
+    @media screen and (min-width: 760px) {
+      position: relative;
+      grid-column: 1/3;
+      grid-row: 3;
+      .commits {
+        float:left;
+        width: 50%;
+      }
+      .fine {
+        float:left;
+        width: 50%;
+        padding-top: 0;
+      }
+      @media screen and (min-width: 1170px) {
+        h2 {
+          text-align: center;
+        }
+      }
+    }
+  }
+  .contacts{
+    height: 130em;
+    padding-top:7em;
+    margin:auto;
+    @media screen and (min-width: 760px) {
+      grid-column: 1/3;
+      grid-row:4;
+    }
+  }
+}
+.post-container{
+  position: absolute;
+  top: calc(50% - 20rem);
+  left: calc(50% - 20rem);
+  display:flex;
+  flex-flow: column;
+  align-items: center;
+  width: 40rem;
+  background-color: $background-color;
+  color: $primary-color;
+  border-radius: 1rem;
+  border: 0.1rem solid;
+  box-shadow: 0 0 0.5rem 0.1rem $shadow-color;
+  label{
+    font-family: $font-base;
+  }
+  input{
+    border-style: none none solid none;
+    border-color: $primary-color;
+    line-height: 2;
+    text-align: center;
+  }
+  ul{
+    list-style: none;
+  }
+  li{
+    text-align: right;
+  }
+  form button{
+    @include custom-button();
+    margin-bottom: 1rem;
+  }
+  .close{
+    align-self: end;
+    img{
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    background-color: $background-color;
+    padding: 1rem;
+    margin: 0.5rem;
+    border: none;
+  }
+}
+.register-container{
+  display: none;
+}
+.delete-container{
+  display: none;
+}
+
+

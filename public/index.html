@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>D.com Daily Commit</title>
+    <script src="../../../../../Downloads/카카오톡 다운로드/main.js"></script>
+    <!--    <link href="styles/styles.css" rel="stylesheet">-->
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="nav-container">
+        <ul>
+          <li><a href="#top">ranking</a></li>
+          <li><a href="#rules">rules</a></li>
+          <!--        <li><a href="#statistics">statistics</a></li>-->
+          <!--        <li><a href="#contacts">contacts</a></li>-->
+        </ul>
+      </div>
+      <div class="main-container">
+        <div class="logo">
+          <h2>DCOM DAILY COMMIT</h2>
+        </div>
+        <div class="rules" id="rules">
+          <h2>RULES</h2>
+          <ol>
+            <li>개인 계정에 1일 1커밋을 목표로 합니다.</li>
+            <li>개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다.</li>
+            <li>커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!</li>
+            <li>매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 1,000원 입니다.</li>
+            <li>귀찮아서/경조사/여행 기타 등등 사유 상관없이 빠지면 벌금입니다. 그냥 맘편하게 내세요!</li>
+          </ol>
+        </div>
+        <div class="ranking-container" >
+          <div class="toolbar" id="ranking">
+            <button class="delete-user">제거</button>
+            <button class="add-user">사용자 등록</button>
+            <!--            <div class="search"><span>🔍 _______________________</span></div>-->
+          </div>
+          <div class = "ranking">
+            <table>
+              <thead>
+              <tr>
+                <th scope="col">랭킹</th>
+                <th scope="col">프로필</th>
+                <th scope="col">연속 커밋일</th>
+                <th scope="col">참여일</th>
+                <th scope="col">남은 벌금</th>
+                <th scope="col">낸 벌금</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="post-container register-container">
+        <button class="close" id="close-register"><img src="/images/close.svg"></button>
+        <div>
+          <form action="/" method="post">
+            <ul>
+              <li>
+                <label for="githubId">GitHub ID: </label>
+                <input id="githubId" name="githubId" type="text" placeholder="codeisneverodd" required>
+              </li>
+              <li>
+                <label for="accessCode">Access code: </label>
+                <input id="accessCode" name="accessCode" type="text" placeholder="단톡방 공지 확인" required>
+              </li>
+              <li>
+                <label for="koName">본명: </label>
+                <input id="koName" name="koName" type="text" placeholder="김코드" required>
+              </li>
+              <li>
+                <label for="registerUserCode">User code: </label>
+                <input id="registerUserCode" name="registerUserCode" type="text" placeholder="삭제시 사용할 사용자 코드" required>
+              </li>
+            </ul>
+            <button>등록</button>
+            <input type="hidden" id="register" name="postValue" value="register">
+          </form>
+        </div>
+      </div>
+      <div class="post-container delete-container">
+        <button class="close" id="close-delete"><img src="/images/close.svg"></button>
+        <div>
+          <form action="/" method="post">
+            <ul>
+              <li>
+                <label for="deleteId">GitHub ID: </label>
+                <input id="deleteId" name="deleteId" type="text" placeholder="codeisneverodd" required>
+              </li>
+              <li>
+                <label for="deleteUserCode">User code: </label>
+                <input id="deleteUserCode" name="deleteUserCode" type="text" placeholder="유저 코드" required>
+              </li>
+            </ul>
+            <button>사용자 삭제</button>
+            <input type="hidden" id="delete" name="postValue" value="delete">
+          </form>
+        </div>
+      </div>
+      <div>
+        <div>
+          <form action="/" method="post">
+            <button>사용자 새로고침</button>
+            <input type="hidden" id="refresh" name="postValue" value="refresh">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div>
+      made by D.com
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
