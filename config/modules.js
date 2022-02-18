@@ -7,7 +7,7 @@ const chalk = require('react-dev-utils/chalk');
 const resolve = require('resolve');
 
 /**
- * Get additional modules paths based on the baseUrl of a compilerOptions object.
+ * Get additional reducers paths based on the baseUrl of a compilerOptions object.
  *
  * @param {Object} options
  */

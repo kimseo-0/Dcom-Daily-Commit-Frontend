@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .App-logo {
@@ -35,4 +35,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "Anton";
+  /*font-weight: 50;*/
+  src: url("./fonts/Anton-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Staatliches";
+  /*font-weight: 50;*/
+  src: url("./fonts/Staatliches-Regular.ttf") format("truetype");
 }

@@ -1,9 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import {Box, Button, ButtonGroup, Avatar, Chip, Link, Typography} from '@mui/material';
-// import '../styles.scss';
-import RankContainer from "../containers/RankContainer";
-
 
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -13,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {fetchRank} from "../reducers/rank";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,27 +31,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-const Rank = ({users, onUpdateRank, onDeleteRank}) => {
+const Rank = ({users, onUpdateRank, onDeleteRank, onFetchRank}) => {
     return (
         <div>
             <Box sx={{paddingTop: 2, paddingBottom: 2, display: "block", overflow: "hidden"}}>
-                <Button variant="outlined"  onClick={onUpdateRank} sx={{float: "left"}}>새로고침</Button>
+                <Button variant="outlined" color="secondary"  onClick={onUpdateRank} sx={{float: "left"}}>새로고침</Button>
                 <Box sx={{float: "right"}}>
                     <ButtonGroup variant="outlined" aria-label="outlined button group">
-                        <Button>사용자 등록</Button>
-                        <Button>제거</Button>
+                        <Button  color="secondary" onClick={onFetchRank}>사용자 등록</Button>
+                        <Button  color="secondary" onClick={onDeleteRank}>제거</Button>
                     </ButtonGroup>
                 </Box>
             </Box>
@@ -71,10 +57,10 @@ const Rank = ({users, onUpdateRank, onDeleteRank}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {users.map((user) => (
+                        {users.map((user, index) => (
                             <StyledTableRow key={user.rank}>
                                 <StyledTableCell component="th" scope="row" align='center'>
-                                    {user.rank}
+                                    {index + 1}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     <Chip

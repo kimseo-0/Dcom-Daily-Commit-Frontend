@@ -201,7 +201,7 @@ module.exports = function (webpackEnv) {
       ? shouldUseSourceMap
         ? 'source-map'
         : false
-      : false,//isEnvDevelopment && 'cheap-modules-source-map',
+      : false,//isEnvDevelopment && 'cheap-reducers-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: paths.appIndexJs,
@@ -297,7 +297,7 @@ module.exports = function (webpackEnv) {
       ],
     },
     resolve: {
-      // This allows you to set a fallback for where webpack should look for modules.
+      // This allows you to set a fallback for where webpack should look for reducers.
       // We placed these paths second because we want `node_modules` to "win"
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
@@ -328,7 +328,7 @@ module.exports = function (webpackEnv) {
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
-        // please link the files into your node_modules/ and let modules-resolution kick in.
+        // please link the files into your node_modules/ and let reducers-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
@@ -467,11 +467,11 @@ module.exports = function (webpackEnv) {
             },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
-            // "style" loader turns CSS into JS modules that inject <style> tags.
+            // "style" loader turns CSS into JS reducers that inject <style> tags.
             // In production, we use MiniCSSExtractPlugin to extract that CSS
             // to a file, but in development "style" loader enables hot editing
             // of CSS.
-            // By default we support CSS Modules with the extension .modules.css
+            // By default we support CSS Modules with the extension .reducers.css
             {
               test: cssRegex,
               exclude: cssModuleRegex,
@@ -491,7 +491,7 @@ module.exports = function (webpackEnv) {
               sideEffects: true,
             },
             // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-            // using the extension .modules.css
+            // using the extension .reducers.css
             {
               test: cssModuleRegex,
               use: getStyleLoaders({
@@ -507,7 +507,7 @@ module.exports = function (webpackEnv) {
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
-            // extensions .modules.scss or .modules.sass
+            // extensions .reducers.scss or .reducers.sass
             {
               test: sassRegex,
               exclude: sassModuleRegex,
@@ -530,7 +530,7 @@ module.exports = function (webpackEnv) {
               sideEffects: true,
             },
             // Adds support for CSS Modules, but using SASS
-            // using the extension .modules.scss or .modules.sass
+            // using the extension .reducers.scss or .reducers.sass
             {
               test: sassModuleRegex,
               use: getStyleLoaders(
@@ -550,7 +550,7 @@ module.exports = function (webpackEnv) {
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
-            // This loader doesn't use a "test" so it will catch all modules
+            // This loader doesn't use a "test" so it will catch all reducers
             // that fall through the other loaders.
             {
               // Exclude `js` files to keep "css" loader working as it injects
@@ -605,7 +605,7 @@ module.exports = function (webpackEnv) {
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
-      // This gives some necessary context to modules not found errors, such as
+      // This gives some necessary context to reducers not found errors, such as
       // the requesting resource.
       new ModuleNotFoundPlugin(paths.appPath),
       // Makes some environment variables available to the JS code, for example:

@@ -1,13 +1,11 @@
-const INITIAL = 'rank/INITIAL';
-const UPDATE = 'rank/UPDATE';
-const DELETE = 'rank/DELETE';
+import { FETCH_USERS, UPDATE_USERS } from '../reducers/rank'
+import {call, takeEvery, all, fork, put} from "redux-saga/effects";
+import axios from "axios";
 
-export const initialRank = () => ({ type: INITIAL });
-export const updateRank = () => ({ type: UPDATE });
-export const deleteRank = () => ({ type: DELETE });
-
-const initialState = {
-    users: [
+function getUsersAPI(data) {
+    console.log('saga')
+    // return axios.get('/api/fetch-user');
+    const testUsers = [
         {
             "id": "justkode",
             "name": "김수한무",
@@ -37,21 +35,26 @@ const initialState = {
             "commitDayCount": 43
         }
     ]
+    return {data: {users : testUsers}}
 }
 
-function rank(state = initialState, action) {
-    switch (action.type) {
-        case UPDATE:
-            return {
-
-            };
-        case DELETE:
-            return {
-
-            };
-        default:
-            return state;
+function* getUsers(action) {
+    try {
+        const data = action.data;
+        const res = yield call(getUsersAPI, data);
+        const {users} = res.data;
+        yield put({type: UPDATE_USERS, data: {users : users}})
+    } catch (e) {
+        console.error(e);
     }
 }
 
-export default rank;
+function* rankWatch() {
+    yield takeEvery(FETCH_USERS, getUsers);
+}
+
+export default function* rankSaga() {
+    yield all([
+        fork(rankWatch)
+    ])
+}
