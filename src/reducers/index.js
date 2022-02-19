@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import rank from './rank';
+import users from './users';
 
 
 const rootReducer = combineReducers({
-    rank
+    user: users
 });
 
 

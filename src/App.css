@@ -48,3 +48,25 @@
   /*font-weight: 50;*/
   src: url("./fonts/Staatliches-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "NanumGothicRegular";
+  /*font-weight: 50;*/
+  src: url("./fonts/NanumGothic-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NanumGothicBold";
+  /*font-weight: 50;*/
+  src: url("./fonts/NanumGothic-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "NanumGothicExtraBold";
+  /*font-weight: 50;*/
+  src: url("./fonts/NanumGothic-ExtraBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BungeeShade";
+  /*font-weight: 50;*/
+  src: url("./fonts/BungeeShade-Regular.ttf") format("truetype");
+}
