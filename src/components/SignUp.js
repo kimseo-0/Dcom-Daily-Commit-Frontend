@@ -16,7 +16,7 @@ const SignUp = ({open, handleClose, addUser}) => {
         });
     };
 
-    const checkSignUpForm = () => {
+    const submitForm = () => {
         if (account.githubId !== "" && account.accessCode !== "" && account.korName !== "" ) {
             addUser(account);
         }
@@ -73,7 +73,7 @@ const SignUp = ({open, handleClose, addUser}) => {
                         </Box>
 
                         {/*<Alert severity="warning" >warning</Alert>*/}
-                        <Button onClick={checkSignUpForm} variant="contained" fullWidth>
+                        <Button onClick={submitForm} variant="contained" fullWidth>
                             Submit
                         </Button>
                     </Box>

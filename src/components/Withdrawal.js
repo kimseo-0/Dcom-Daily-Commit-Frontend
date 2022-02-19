@@ -15,7 +15,7 @@ const Withdrawal = ({open, handleClose, deleteUser}) => {
         });
     };
 
-    const checkSignUpForm = () => {
+    const submitForm = () => {
         if (account.githubId !== "" && account.userCode !== "" ) {
             deleteUser(account);
         }
@@ -72,7 +72,7 @@ const Withdrawal = ({open, handleClose, deleteUser}) => {
                         </Box>
 
                         {/*<Alert severity="warning" >warning</Alert>*/}
-                        <Button onClick={checkSignUpForm} variant="contained" fullWidth color='error'>
+                        <Button onClick={submitForm} variant="contained" fullWidth color='error'>
                             Delete
                         </Button>
                     </Box>
