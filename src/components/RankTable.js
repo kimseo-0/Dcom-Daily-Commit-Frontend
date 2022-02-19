@@ -1,16 +1,7 @@
-import React, {useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import {FETCH_USERS} from "../reducers/users";
+import React from 'react';
+import {Box, Card, Avatar, CircularProgress, IconButton, Typography,
+        Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 
-import {Box, Card, Avatar, CircularProgress, IconButton, Typography} from '@mui/material';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 const RankTable = ({users, usersLoading}) => {
     return (
@@ -21,7 +12,7 @@ const RankTable = ({users, usersLoading}) => {
                         <CircularProgress sx={{}} color="primary" />
                     </Card>
                         :
-                    users.length === 0 ?
+                    users === undefined || users.length === 0 ?
                         <Card sx={{display: 'flex', padding: 5, textAlign:"center"}}>
                             유저가 없습니다.
                         </Card>
@@ -51,7 +42,8 @@ const RankTable = ({users, usersLoading}) => {
                                         </TableCell>
                                         <TableCell align="left">
                                             <IconButton href={"https://github.com/" + user.id} sx={{}}>
-                                                <Avatar alt={user.id} src={user.userImg} sx={{border: 1, borderColor: "#dbdbdb"}} />
+                                                <Avatar alt={user.id} src={user.userImg}
+                                                        sx={{border: 1, borderColor: "background.back"}} />
                                             </IconButton>
                                             <Typography
                                                 component="span"

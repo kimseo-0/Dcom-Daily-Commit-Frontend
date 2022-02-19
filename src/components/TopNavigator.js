@@ -5,7 +5,7 @@ import DataObjectIcon from "@mui/icons-material/DataObject";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 
 
-const TopNavigator = ({addUser, handleClickOpen}) => {
+const TopNavigator = ({handleClickOpen}) => {
     return (
         <AppBar position="fixed"
                 color="inherit"
@@ -37,7 +37,7 @@ const TopNavigator = ({addUser, handleClickOpen}) => {
                     <Button size="large" color="secondary" href="#ranking">
                         RANKING
                     </Button>
-                    <Button size="large" color="primary" variant='text' onClick={handleClickOpen} endIcon={<PersonAddAltIcon/>}>
+                    <Button size="large" color="point" variant='text' onClick={handleClickOpen} endIcon={<PersonAddAltIcon/>}>
                         SIGN UP
                     </Button>
                 </Box>

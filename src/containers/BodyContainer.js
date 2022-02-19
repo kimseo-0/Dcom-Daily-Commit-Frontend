@@ -3,10 +3,10 @@ import {connect, useDispatch} from 'react-redux';
 import {Box, Button, Grid, List, ListItemText, Typography} from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
+import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
+
 import Offset from "../components/Offset";
 import RankTable from "../components/RankTable";
-
-import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
 import TopNavigator from "../components/TopNavigator";
 import BottomNavigator from "../components/BottomNavigator";
 import SignUp from "../components/SignUp";

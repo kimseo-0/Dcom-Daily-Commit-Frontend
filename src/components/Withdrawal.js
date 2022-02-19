@@ -1,20 +1,8 @@
 import React, {useState} from 'react';
-// import {Box, Card, Button, ButtonGroup, Avatar, Chip, CircularProgress } from '@mui/material';
-// import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
+import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
-import {Alert, Box, TextField} from "@mui/material";
 
 const Withdrawal = ({open, handleClose, deleteUser}) => {
-    const [githubIdIsAvailable, setGithubIdIsAvailable] = React.useState(false);
-    const [userCodeIsAvailable, setUserCodeIsAvailable] = React.useState(false);
     const [account, setAccount] = useState({
         githubId: "",
         userCode: ""

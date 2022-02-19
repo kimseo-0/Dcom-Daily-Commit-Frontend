@@ -1,18 +1,8 @@
 import React, {useState} from 'react';
-import {Box, Button, TextField, Alert } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
+import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography';
 
 const SignUp = ({open, handleClose, addUser}) => {
-    const [githubIdIsAvailable, setGithubIdIsAvailable] = React.useState(false);
-    const [accessCodeIsAvailable, setAccessCodeIsAvailable] = React.useState(false);
-    const [korNameIsAvailable, setKorNameIsAvailable] = React.useState(false);
     const [account, setAccount] = useState({
         githubId: "",
         accessCode: "",

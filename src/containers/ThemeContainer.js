@@ -13,9 +13,11 @@ const theme = createTheme({
         },
         background: {
             main: '#FFFFFF',
-            top: '#D8D2CB',
             back: '#EEEEEE'
         },
+        point: {
+            main: '#63B4B8'
+        }
     },
 });
 
