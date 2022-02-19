@@ -10,22 +10,38 @@ export const UPDATE_DELETE_USER = "UPDATE_DELETE_USER";
 export const UPDATE_USERS = "UPDATE_USERS";
 
 const initialState = {
+    info: {type: null, message: null},
     usersLoading: true,
+    addUserLoading: false,
+    deleteUserLoading: false,
     users: []
 }
 
 function users(state = initialState, action) {
     switch (action.type) {
-        case REFRESH_USERS:
-            return {
-                usersLoading: true
-            }
         case FETCH_USERS:
-            return {
-                usersLoading: true
-            }
+            return produce(state, draft => {
+                draft.usersLoading = true
+            });
+        case REFRESH_USERS:
+            return produce(state, draft => {
+                draft.usersLoading = true
+            });
+        case ADD_USER:
+            return produce(state, draft => {
+                draft.usersLoading = true
+                draft.addUserLoading = true
+            });
+        case DELETE_USER:
+            return produce(state, draft => {
+                draft.usersLoading = true
+                draft.deleteUserLoading = true
+            });
         case UPDATE_ADD_USER:
             return produce(state, draft => {
+                draft.info = {type: "success", message: "Success Sign up!"}
+                draft.usersLoading = false
+                draft.addUserLoading = false
                 draft.users.push(action.data.user);
             });
         case UPDATE_DELETE_USER:
@@ -33,13 +49,16 @@ function users(state = initialState, action) {
                 return user.id === action.data.githubId
             });
             return produce(state, draft => {
+                draft.info = {type: "success", message: "Success Delete user!"}
+                draft.usersLoading = false
+                draft.deleteUserLoading = false
                 draft.users.splice(deleteIndex, 1)
             });
         case UPDATE_USERS:
-            return {
-                usersLoading : false,
-                users : action.data.users
-            }
+            return produce(state, draft => {
+                draft.usersLoading = false
+                draft.users = action.data.users
+            });
         default:
             return state;
     }
