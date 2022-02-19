@@ -9,6 +9,8 @@ export const UPDATE_ADD_USER = "UPDATE_ADD_USER";
 export const UPDATE_DELETE_USER = "UPDATE_DELETE_USER";
 export const UPDATE_USERS = "UPDATE_USERS";
 
+export const ERROR_USERS = "ERROR_USERS"
+
 const initialState = {
     info: {type: null, message: null},
     usersLoading: true,
@@ -58,6 +60,13 @@ function users(state = initialState, action) {
             return produce(state, draft => {
                 draft.usersLoading = false
                 draft.users = action.data.users
+            });
+        case ERROR_USERS:
+            return produce(state, draft => {
+                draft.info = {type: "error", message: action.data.message}
+                draft.usersLoading = false
+                draft.addUserLoading = false
+                draft.deleteUserLoading = false
             });
         default:
             return state;

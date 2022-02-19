@@ -1,6 +1,8 @@
-import {FETCH_USERS, UPDATE_USERS,
-        ADD_USER, UPDATE_ADD_USER,
-        UPDATE_DELETE_USER} from '../reducers/users'
+import {
+    FETCH_USERS, UPDATE_USERS,
+    ADD_USER, UPDATE_ADD_USER,
+    UPDATE_DELETE_USER, ERROR_USERS
+} from '../reducers/users'
 import {call, takeEvery, all, fork, put} from "redux-saga/effects";
 import axios from "axios";
 
@@ -43,7 +45,7 @@ function* fetchUsers(action) {
         yield put({type: UPDATE_USERS, data: {users : users}})
     } catch (e) {
         console.error(e);
-        // yield put({type: UPDATE_USERS, data: {message : ''}})
+        yield put({type: ERROR_USERS, data: {message : 'Error fetch error'}})
     }
 }
 
@@ -54,7 +56,7 @@ function* refreshUsers(action) {
         yield put({type: UPDATE_USERS, data: {users : users}})
     } catch (e) {
         console.error(e);
-        // yield put({type: UPDATE_USERS, data: {message : ''}})
+        yield put({type: ERROR_USERS, data: {message : 'Error refresh error'}})
     }
 }
 
@@ -66,6 +68,7 @@ function* addUser(action) {
         yield put({type: UPDATE_ADD_USER, data: {user : user}})
     } catch (e) {
         console.error(e);
+        yield put({type: ERROR_USERS, data: {message : 'Error sign up error'}})
     }
 }
 
@@ -77,6 +80,7 @@ function* deleteUser(action) {
         yield put({type: UPDATE_DELETE_USER, data: {githubId : githubId}})
     } catch (e) {
         console.error(e);
+        yield put({type: ERROR_USERS, data: {message : 'Error delete user error'}})
     }
 }
 
