@@ -11,13 +11,15 @@ export const UPDATE_USERS = "UPDATE_USERS";
 
 const initialState = {
     usersLoading: true,
-    usersAPIError: false,
-    userAPIError: false,
     users: []
 }
 
 function users(state = initialState, action) {
     switch (action.type) {
+        case REFRESH_USERS:
+            return {
+                usersLoading: true
+            }
         case FETCH_USERS:
             return {
                 usersLoading: true
