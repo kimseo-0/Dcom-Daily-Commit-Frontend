@@ -1,11 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {AppBar, Box, Typography, Toolbar, Button, Grid, List, ListItemText} from '@mui/material';
+import {AppBar, Box, Typography, Toolbar, Button, Grid} from '@mui/material';
 import DataObjectIcon from "@mui/icons-material/DataObject";
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import Offset from "./Offset";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import RankTable from "./RankTable";
 
 
 const TopNavigator = ({handleOpen}) => {

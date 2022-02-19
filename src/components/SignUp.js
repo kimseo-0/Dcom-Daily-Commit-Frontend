@@ -1,8 +1,8 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState} from 'react';
 import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField, CircularProgress } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const SignUp = ({open, handleClose, addUser, addUserLoading, handleInfoOpen}) => {
+const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
     const [account, setAccount] = useState({
         githubId: "",
         accessCode: "",
@@ -24,45 +24,25 @@ const SignUp = ({open, handleClose, addUser, addUserLoading, handleInfoOpen}) =>
     }
 
     return (
-            <Dialog
-                onClose={handleClose}
-                open={open}
-            >
+            <Dialog onClose={handleClose} open={open} >
                 <DialogTitle sx={{ m: 0, p: 2}}>
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="div"
-                        color="primary"
-                        sx={{fontFamily: "Anton", textAlign:'center'}}
-                    >
+                    <Typography variant="h5" noWrap component="div" color="primary"
+                        sx={{fontFamily: "Anton", textAlign:'center'}} >
                         Sign Up
                     </Typography>
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                        }}
-                    >
+                    <IconButton onClick={handleClose}
+                        sx={{ position: 'absolute', right: 8, top: 8,
+                            color: 'button.main' }} >
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers sx={{padding: 1}}>
                     <Box
-                        component="form"
-                        sx={{
-                            margin: 4,
-                            width: {sm : 450},
-                        }}
-                        noValidate
-                        autoComplete="off"
-                        maxWidth="sm"
-                    >
-                        <Alert severity="info" sx={{fontFamily: "Anton"}}>단톡방에서 Acess Code를 확인하세요</Alert>
+                        component="form" noValidate autoComplete="off" maxWidth="sm"
+                        sx={{ margin: 4, width: {sm : 450}}} >
+                        <Alert severity="info" sx={{fontFamily: "Anton"}}>
+                            단톡방에서 Acess Code를 확인하세요
+                        </Alert>
 
                         <Box sx={{marginTop:1, marginBottom:4}}>
                             <TextField id="githubId" label="Github Id" onChange={onChangeAccount}
@@ -73,7 +53,6 @@ const SignUp = ({open, handleClose, addUser, addUserLoading, handleInfoOpen}) =>
                                        variant="standard" fullWidth margin={"dense"} />
                         </Box>
 
-                        {/*<Alert severity="warning" >warning</Alert>*/}
                         <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading}>
                             {addUserLoading ?
                                 <CircularProgress color='inherit'/>

@@ -58,13 +58,8 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
                 <Grid item xs={0} md={1}/>
                 <Grid item xs={12} md={10} sx={{padding: 2, backgroundColor: 'background.main'}}>
                     <Box sx={{padding: 2}}>
-                        <Typography
-                            variant="h4"
-                            noWrap
-                            component="div"
-                            color="secondary"
-                            sx={{fontFamily:"Anton"}}
-                        >
+                        <Typography variant="h4" noWrap component="div" color="secondary"
+                            sx={{fontFamily:"Anton"}} >
                             RULES
                         </Typography>
                         <List sx={{fontFamily: 'NanumGothicRegular'}}>
@@ -77,13 +72,8 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
                     </Box>
                     <Offset id="ranking"/>
                     <Box sx={{padding: 2}}>
-                        <Typography
-                            variant="h4"
-                            noWrap
-                            component="div"
-                            color="secondary"
-                            sx={{fontFamily:"Anton"}}
-                        >
+                        <Typography variant="h4" noWrap component="div" color="secondary"
+                            sx={{fontFamily:"Anton"}} >
                             RANKING
                         </Typography>
 
@@ -108,8 +98,8 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
 
             <BottomNavigator/>
 
-            <SignUp open={openSignUp} handleClose={() => {handleClose('SignUp')}} addUser={(data) => {addUser(data)}} addUserLoading={addUserLoading}  handleInfoOpen={()=>{handleOpen('info')}}/>
-            <Withdrawal open={openDeleteUser} handleClose={() => {handleClose('DeleteUser')}} deleteUser={(data) => {deleteUser(data)}} deleteUserLoading={deleteUserLoading}  handleInfoOpen={()=>{handleOpen('info')}}/>
+            <SignUp open={openSignUp} handleClose={() => {handleClose('SignUp')}} addUser={(data) => {addUser(data)}} addUserLoading={addUserLoading} />
+            <Withdrawal open={openDeleteUser} handleClose={() => {handleClose('DeleteUser')}} deleteUser={(data) => {deleteUser(data)}} deleteUserLoading={deleteUserLoading} />
         </Box>
     );
 };

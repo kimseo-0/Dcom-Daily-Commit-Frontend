@@ -17,6 +17,9 @@ const theme = createTheme({
         },
         point: {
             main: '#63B4B8'
+        },
+        button: {
+            main: '#c6c6c6'
         }
     },
 });

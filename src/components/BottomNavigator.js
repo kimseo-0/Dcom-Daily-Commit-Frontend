@@ -7,8 +7,7 @@ const BottomNavigator = () => {
     return (
         <Box sx={{
             paddingLeft: {xs: 0, md: 14},
-            paddingRight: {xs: 0, md: 14},
-        }}>
+            paddingRight: {xs: 0, md: 14}}}>
             <Box sx={{padding: 5, textAlign: 'center'}}>
                 <IconButton href="https://github.com/BambooKim/DcomDailyCommitBackend">
                     <GitHubIcon/>
