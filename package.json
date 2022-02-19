@@ -146,5 +146,6 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "proxy": "http://bambookim.iptime.org:8080"
 }
