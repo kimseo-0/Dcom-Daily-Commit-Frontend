@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {connect, useDispatch} from 'react-redux';
-import {Box, Button, Grid, List, ListItemText, Typography} from "@mui/material";
+import {Box, Button, Grid, List, ListItemText, Typography, Snackbar, Alert, IconButton} from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
+import CloseIcon from '@mui/icons-material/Close';
 
 import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
 
@@ -11,36 +12,45 @@ import TopNavigator from "../components/TopNavigator";
 import BottomNavigator from "../components/BottomNavigator";
 import SignUp from "../components/SignUp";
 import Withdrawal from "../components/Withdrawal";
+import Info from "../components/Info";
 
-const BodyContainer = ({ users, usersLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
+const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
     useEffect(() => {
         fetchUsers()
-    },[])
+    },[]);
 
+    useEffect(() => {
+        if (info.type !== null) {
+            handleOpen("info")
+        }
+    },[info]);
+
+    const [openInfo, setOpenInfo] = React.useState(false);
     const [openSignUp, setOpenSignUp] = React.useState(false);
     const [openDeleteUser, setOpenDeleteUser] = React.useState(false);
-    const handleClickOpen = (type) => {
-        if(type === 'openSignUp') {
+
+    const handleOpen = (type) => {
+        if(type === 'SignUp') {
             setOpenSignUp(true);
-        } else if(type === 'openDeleteUser') {
+        } else if(type === 'DeleteUser') {
             setOpenDeleteUser(true);
+        } else {
+            setOpenInfo(true);
         }
     };
     const handleClose = (type) => {
-        if(type === 'openSignUp') {
+        if(type === 'SignUp') {
             setOpenSignUp(false);
-        } else if(type === 'openDeleteUser') {
+        } else if(type === 'DeleteUser') {
             setOpenDeleteUser(false);
+        } else {
+            setOpenInfo(false);
         }
     };
 
     return (
-        <Box sx={{
-            width: "auto",
-            height: "auto",
-            backgroundColor: 'background.back'
-        }}>
-            <TopNavigator handleClickOpen={() => {handleClickOpen('openSignUp')}}/>
+        <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.back' }}>
+            <TopNavigator handleOpen={() => {handleOpen('SignUp')}}/>
 
             <Offset id='top'/>
 
@@ -83,7 +93,7 @@ const BodyContainer = ({ users, usersLoading, fetchUsers, refreshUsers, addUser,
                                 새로고침
                             </Button>
                             <Button  color="error" variant='outlined' sx={{float: "right"}}
-                                     onClick={() => {handleClickOpen('openDeleteUser')}}>
+                                     onClick={() => {handleOpen('DeleteUser')}}>
                                 사용자 제거
                             </Button>
                         </Box>
@@ -94,16 +104,21 @@ const BodyContainer = ({ users, usersLoading, fetchUsers, refreshUsers, addUser,
                 <Grid item xs={0} md={10}/>
             </Grid>
 
+            <Info open={openInfo} info={info} handleInfoClose={() => {handleClose('info')}}/>
+
             <BottomNavigator/>
 
-            <SignUp open={openSignUp} handleClose={() => {handleClose('openSignUp')}} addUser={(data) => {addUser(data)}} />
-            <Withdrawal open={openDeleteUser} handleClose={() => {handleClose('openDeleteUser')}} deleteUser={(data) => {deleteUser(data)}} />
+            <SignUp open={openSignUp} handleClose={() => {handleClose('SignUp')}} addUser={(data) => {addUser(data)}} addUserLoading={addUserLoading}  handleInfoOpen={()=>{handleOpen('info')}}/>
+            <Withdrawal open={openDeleteUser} handleClose={() => {handleClose('DeleteUser')}} deleteUser={(data) => {deleteUser(data)}} deleteUserLoading={deleteUserLoading}  handleInfoOpen={()=>{handleOpen('info')}}/>
         </Box>
     );
 };
 
 const mapStateToProps = state => ({
+    info : state.user.info,
     usersLoading : state.user.usersLoading,
+    addUserLoading: state.user.addUserLoading,
+    deleteUserLoading: state.user.deleteUserLoading,
     users: state.user.users,
 });
 
