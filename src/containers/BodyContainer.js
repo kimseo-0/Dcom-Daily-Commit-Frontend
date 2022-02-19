@@ -6,7 +6,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import Offset from "../components/Offset";
 import RankTable from "../components/RankTable";
 
-import {UPDATE_USERS, REFRESH_USERS, ADD_USER, DELETE_USER, UPDATE_DELETE_USER, FETCH_USERS} from "../reducers/users";
+import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
 import TopNavigator from "../components/TopNavigator";
 import BottomNavigator from "../components/BottomNavigator";
 import SignUp from "../components/SignUp";
@@ -52,7 +52,7 @@ const BodyContainer = ({ users, usersLoading, fetchUsers, refreshUsers, addUser,
                             variant="h4"
                             noWrap
                             component="div"
-                            color="primary"
+                            color="secondary"
                             sx={{fontFamily:"Anton"}}
                         >
                             RULES
@@ -71,14 +71,14 @@ const BodyContainer = ({ users, usersLoading, fetchUsers, refreshUsers, addUser,
                             variant="h4"
                             noWrap
                             component="div"
-                            color="primary"
+                            color="secondary"
                             sx={{fontFamily:"Anton"}}
                         >
                             RANKING
                         </Typography>
 
                         <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden", fontFamily: 'NanumGothicRegular'}} >
-                            <Button onClick={refreshUsers} variant="outlined" color="secondary" sx={{float: "left"}}
+                            <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left"}}
                                     startIcon={<RefreshIcon/>}>
                                 새로고침
                             </Button>
