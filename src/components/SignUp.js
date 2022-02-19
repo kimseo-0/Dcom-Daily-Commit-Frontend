@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField } from '@mui/material';
+import React, {useState, useCallback} from 'react';
+import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField, CircularProgress } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const SignUp = ({open, handleClose, addUser}) => {
+const SignUp = ({open, handleClose, addUser, addUserLoading, handleInfoOpen}) => {
     const [account, setAccount] = useState({
         githubId: "",
         accessCode: "",
@@ -19,6 +19,7 @@ const SignUp = ({open, handleClose, addUser}) => {
     const submitForm = () => {
         if (account.githubId !== "" && account.accessCode !== "" && account.korName !== "" ) {
             addUser(account);
+            handleClose();
         }
     }
 
@@ -73,8 +74,12 @@ const SignUp = ({open, handleClose, addUser}) => {
                         </Box>
 
                         {/*<Alert severity="warning" >warning</Alert>*/}
-                        <Button onClick={submitForm} variant="contained" fullWidth>
-                            Submit
+                        <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading}>
+                            {addUserLoading ?
+                                <CircularProgress color='inherit'/>
+                            :
+                                "Submit"
+                            }
                         </Button>
                     </Box>
                 </DialogContent>
