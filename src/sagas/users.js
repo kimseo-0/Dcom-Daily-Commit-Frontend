@@ -40,7 +40,6 @@ function* fetchUsers(action) {
     try {
         const res = yield call(fetchUsersAPI);
         const users = res.data;
-        console.log(res.data)
         yield put({type: UPDATE_USERS, data: {users : users}})
     } catch (e) {
         console.error(e);
@@ -52,7 +51,6 @@ function* refreshUsers(action) {
     try {
         const res = yield call(refreshUsersAPI);
         const users = res.data;
-        console.log(users)
         yield put({type: UPDATE_USERS, data: {users : users}})
     } catch (e) {
         console.error(e);
@@ -74,9 +72,7 @@ function* addUser(action) {
 function* deleteUser(action) {
     try {
         const data = action.data;
-        console.log(data)
         const res = yield call(deleteUsersAPI, data);
-        console.log(res)
         const githubId = res.data;
         yield put({type: UPDATE_DELETE_USER, data: {githubId : githubId}})
     } catch (e) {
