@@ -1,8 +1,11 @@
-import React, {useState} from 'react';
-import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField } from '@mui/material';
+import React, {useCallback, useState} from 'react';
+import {
+    Dialog, DialogTitle, DialogContent,
+    Button, IconButton, Typography, Alert, Box, TextField, CircularProgress
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Withdrawal = ({open, handleClose, deleteUser}) => {
+const Withdrawal = ({open, handleClose, deleteUser, deleteUserLoading, handleInfoOpen}) => {
     const [account, setAccount] = useState({
         githubId: "",
         userCode: ""
@@ -18,6 +21,7 @@ const Withdrawal = ({open, handleClose, deleteUser}) => {
     const submitForm = () => {
         if (account.githubId !== "" && account.userCode !== "" ) {
             deleteUser(account);
+            handleClose();
         }
     }
 
@@ -73,7 +77,11 @@ const Withdrawal = ({open, handleClose, deleteUser}) => {
 
                         {/*<Alert severity="warning" >warning</Alert>*/}
                         <Button onClick={submitForm} variant="contained" fullWidth color='error'>
-                            Delete
+                            {deleteUserLoading ?
+                                <CircularProgress color='inherit'/>
+                                :
+                                "DELETE"
+                            }
                         </Button>
                     </Box>
                 </DialogContent>
