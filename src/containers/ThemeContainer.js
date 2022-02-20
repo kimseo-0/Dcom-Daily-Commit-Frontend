@@ -6,20 +6,21 @@ import BodyContainer from "./BodyContainer";
 const theme = createTheme({
     palette: {
         primary: {
-            main:'#1A374D',
+            main:'#FFFFFF',
         },
         secondary: {
-            main: '#406882',
+            main: '#25292F',
         },
         background: {
             main: '#FFFFFF',
-            back: '#EEEEEE'
+            top: '#25292F',
+            back: '#FFFFFF'
         },
         point: {
-            main: '#63B4B8'
+            main: '#FD8C73'
         },
         button: {
-            main: '#c6c6c6'
+            main: '#C6C6C6'
         }
     },
 });
