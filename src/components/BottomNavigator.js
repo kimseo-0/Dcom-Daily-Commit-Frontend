@@ -11,7 +11,7 @@ const BottomNavigator = () => {
             <Box sx={{padding: 4, textAlign: 'center', fontSize: 14}}>
                 <Box sx={{padding: 2}}>
                     <Typography sx={{fontSize: 14}}>
-                        사이트에 문제가 있거나 기억하고 싶다면?
+                        사이트에 문제가 있거나 기여하고 싶다면?
                     </Typography>
 
                     <Link underline="hover" sx={{marginRight: 1, color: 'point.main'}} href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
