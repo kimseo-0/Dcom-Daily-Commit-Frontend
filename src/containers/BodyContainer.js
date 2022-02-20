@@ -66,7 +66,7 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
                             <ListItemText sx={{textAlign: "left"}} primary="1. 개인 계정에 1일 1커밋을 목표로 합니다."/>
                             <ListItemText sx={{textAlign: "left"}} primary="2. 개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다."/>
                             <ListItemText sx={{textAlign: "left"}} primary="3. 커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!"/>
-                            <ListItemText sx={{textAlign: "left"}} primary="4. 매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 1,000원 입니다."/>
+                            <ListItemText sx={{textAlign: "left"}} primary="4. 매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 500원 입니다."/>
                             <ListItemText sx={{textAlign: "left"}} primary="5. 귀찮아서/경조사/여행 기타 등등 사유 상관없이 빠지면 벌금입니다. 그냥 맘편하게 내세요!"/>
                         </List>
                     </Box>
