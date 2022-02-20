@@ -9,16 +9,29 @@ const BottomNavigator = () => {
             paddingLeft: {xs: 0, md: 14},
             paddingRight: {xs: 0, md: 14}}}>
             <Box sx={{padding: 5, textAlign: 'center'}}>
-                <IconButton href="https://github.com/BambooKim/DcomDailyCommitBackend">
-                    <GitHubIcon/>
-                </IconButton>
-                BambooKim
-                <IconButton href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
-                    <GitHubIcon/>
-                </IconButton>
-                kimseo-0
+                <Box>
+                    <Typography>
+                        사이트에 문제가 있거나 기여하고 싶다면?
+                    </Typography>
+                    FE
+                    <IconButton href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
+                        <GitHubIcon/>
+                    </IconButton>
+                    BE
+                    <IconButton href="https://github.com/BambooKim/DcomDailyCommitBackend">
+                        <GitHubIcon/>
+                    </IconButton>
+                </Box>
                 <Typography>
-                    Made by D.com
+                    Made by
+                    <IconButton href="https://github.com/BambooKim/">
+                        <GitHubIcon/>
+                    </IconButton>
+                    BambooKim
+                    <IconButton href="https://github.com/kimseo-0/">
+                        <GitHubIcon/>
+                    </IconButton>
+                    kimseo-0
                 </Typography>
             </Box>
         </Box>
