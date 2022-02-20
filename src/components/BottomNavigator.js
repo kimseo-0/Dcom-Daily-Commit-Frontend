@@ -8,7 +8,7 @@ const BottomNavigator = () => {
         <Box sx={{
             paddingLeft: {xs: 0, md: 14},
             paddingRight: {xs: 0, md: 14}}}>
-            <Box sx={{padding: 4, textAlign: 'center'}}>
+            <Box sx={{padding: 4, textAlign: 'center', fontSize: 14}}>
                 <Box sx={{padding: 2}}>
                     <Typography sx={{fontSize: 14}}>
                         사이트에 문제가 있거나 기여하고 싶다면?
@@ -22,7 +22,7 @@ const BottomNavigator = () => {
                         BackEnd
                     </Link>
                 </Box>
-                <Typography>
+                <Typography sx={{fontSize: 14}}>
                     Made by
                     <IconButton sx={{marginLeft: 1}} href="https://github.com/BambooKim/">
                         <GitHubIcon/>
