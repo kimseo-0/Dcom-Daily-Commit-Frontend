@@ -17,8 +17,8 @@ const theme = createTheme({
             back: '#FFFFFF'
         },
         point: {
-            main: '#7a9ed3',
-            error: '#FD8C73',
+            main: '#FD8C73',
+            // blue: '#FD8C73',
 
         },
         button: {
