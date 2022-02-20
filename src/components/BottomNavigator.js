@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Box, Typography, IconButton} from '@mui/material';
+import {Box, Typography, IconButton, Link} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 const BottomNavigator = () => {
@@ -8,27 +8,27 @@ const BottomNavigator = () => {
         <Box sx={{
             paddingLeft: {xs: 0, md: 14},
             paddingRight: {xs: 0, md: 14}}}>
-            <Box sx={{padding: 5, textAlign: 'center'}}>
-                <Box>
-                    <Typography>
+            <Box sx={{padding: 4, textAlign: 'center'}}>
+                <Box sx={{padding: 2}}>
+                    <Typography sx={{fontSize: 14}}>
                         사이트에 문제가 있거나 기여하고 싶다면?
                     </Typography>
-                    FE
-                    <IconButton href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
-                        <GitHubIcon/>
-                    </IconButton>
-                    BE
-                    <IconButton href="https://github.com/BambooKim/DcomDailyCommitBackend">
-                        <GitHubIcon/>
-                    </IconButton>
+
+                    <Link underline="hover" sx={{marginRight: 1, color: 'point.main'}} href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
+                        FrontEnd
+                    </Link>
+                    |
+                    <Link color="point" underline="hover" sx={{marginLeft: 1, color: 'point.main'}}  href="https://github.com/BambooKim/DcomDailyCommitBackend">
+                        BackEnd
+                    </Link>
                 </Box>
                 <Typography>
                     Made by
-                    <IconButton href="https://github.com/BambooKim/">
+                    <IconButton sx={{marginLeft: 1}} href="https://github.com/BambooKim/">
                         <GitHubIcon/>
                     </IconButton>
                     BambooKim
-                    <IconButton href="https://github.com/kimseo-0/">
+                    <IconButton sx={{marginLeft: 1}} href="https://github.com/kimseo-0/">
                         <GitHubIcon/>
                     </IconButton>
                     kimseo-0
