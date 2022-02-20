@@ -26,7 +26,7 @@ const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
     return (
             <Dialog onClose={handleClose} open={open} >
                 <DialogTitle sx={{ m: 0, p: 2}}>
-                    <Typography variant="h5" noWrap component="div" color="primary"
+                    <Typography variant="h5" noWrap component="div" color="secondary"
                         sx={{fontFamily: "Anton", textAlign:'center'}} >
                         Sign Up
                     </Typography>
