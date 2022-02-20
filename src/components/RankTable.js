@@ -41,9 +41,9 @@ const RankTable = ({users, usersLoading}) => {
                                             }
                                         </TableCell>
                                         <TableCell align="left">
-                                            <IconButton href={"https://github.com/" + user.id} sx={{}}>
+                                            <IconButton href={"https://github.com/" + user.id} sx={{marginRight: 1}}>
                                                 <Avatar alt={user.id} src={user.userImg}
-                                                        sx={{border: 1, borderColor: "background.back"}} />
+                                                        sx={{border: 1, borderColor: "background.light"}} />
                                             </IconButton>
                                             <Typography
                                                 component="span"
