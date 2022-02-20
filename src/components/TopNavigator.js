@@ -8,7 +8,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 const TopNavigator = ({handleOpen}) => {
     return (
         <AppBar position="fixed"
-                color="inherit"
+                sx={{backgroundColor: 'background.top'}}
                 >
             <Toolbar>
                 <Grid container>
@@ -31,10 +31,10 @@ const TopNavigator = ({handleOpen}) => {
                         <Box sx={{ flexGrow: 1 }}/>
 
                         <Box sx={{float: "right"}}>
-                            <Button size="large" color="secondary" href="#top">
+                            <Button size="large" color="primary" href="#top">
                                 RULES
                             </Button>
-                            <Button size="large" color="secondary" href="#ranking">
+                            <Button size="large" color="primary" href="#ranking">
                                 RANKING
                             </Button>
                             <Button size="large" color="point" variant='text' onClick={handleOpen} endIcon={<PersonAddAltIcon/>}>
