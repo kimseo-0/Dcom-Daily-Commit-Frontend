@@ -20,7 +20,7 @@ const TopNavigator = ({handleOpen}) => {
 
     return (
         <AppBar position="fixed"
-                sx={{backgroundColor: 'background.top', height: 60}}
+                sx={{backgroundColor: 'background.dark', height: 60}}
                 >
             <Toolbar>
                 <Grid container>

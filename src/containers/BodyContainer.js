@@ -49,7 +49,7 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
     };
 
     return (
-        <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.back' }}>
+        <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }}>
             <TopNavigator handleOpen={() => {handleOpen('SignUp')}}/>
 
             <Offset id='top'/>
