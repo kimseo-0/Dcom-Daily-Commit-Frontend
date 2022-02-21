@@ -44,7 +44,7 @@ const TopNavigator = ({handleOpen}) => {
                                 RANKING
                             </Button>
                             <Button size="large" color="point" variant='text' onClick={handleOpen} endIcon={<PersonAddAltIcon/>}>
-                                SIGN UP
+                                사용자 등록
                             </Button>
                         </Box>
                         <Box sx={{float: "right", display: {xs: 'flex', md: 'none'}}}>
