@@ -18,7 +18,7 @@ const BottomNavigator = () => {
                         FrontEnd
                     </Link>
                     |
-                    <Link color="point" underline="hover" sx={{marginLeft: 1, color: 'point.main'}}  href="https://github.com/BambooKim/DcomDailyCommitBackend">
+                    <Link underline="hover" sx={{marginLeft: 1, color: 'point.main'}}  href="https://github.com/BambooKim/DcomDailyCommitBackend">
                         BackEnd
                     </Link>
                 </Box>
@@ -27,11 +27,15 @@ const BottomNavigator = () => {
                     <IconButton sx={{marginLeft: 1}} href="https://github.com/BambooKim/">
                         <GitHubIcon/>
                     </IconButton>
-                    BambooKim
+                    <Link underline="hover" sx={{ color: 'secondary.main'}}  href="https://github.com/BambooKim/">
+                        BambooKim
+                    </Link>
                     <IconButton sx={{marginLeft: 1}} href="https://github.com/kimseo-0/">
                         <GitHubIcon/>
                     </IconButton>
-                    kimseo-0
+                    <Link underline="hover" sx={{ color: 'secondary.main'}}  href="https://github.com/kimseo-0/">
+                        kimseo-0
+                    </Link>
                 </Typography>
             </Box>
         </Box>
