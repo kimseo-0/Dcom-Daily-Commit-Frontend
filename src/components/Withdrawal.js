@@ -41,13 +41,13 @@ const Withdrawal = ({open, handleClose, deleteUser, deleteUserLoading}) => {
                     <Box component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, width: {sm : 450}}} >
                         <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
-                            삭제시 연속 커밋일 등 모든 정보가 삭제됩니다.
+                            사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
                         </Alert>
 
                         <Box sx={{marginBottom:4}}>
-                            <TextField id="githubId" label="Github Id" onChange={onChangeAccount}
+                            <TextField required id="githubId" label="Github Id" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
-                            <TextField id="userCode" label="User Code" onChange={onChangeAccount}
+                            <TextField required id="userCode" label="등록 시 사용한 User Code" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} />
                         </Box>
 
@@ -55,7 +55,7 @@ const Withdrawal = ({open, handleClose, deleteUser, deleteUserLoading}) => {
                             {deleteUserLoading ?
                                 <CircularProgress color='inherit'/>
                                 :
-                                "DELETE"
+                                "사용자 제거"
                             }
                         </Button>
                     </Box>
