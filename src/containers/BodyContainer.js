@@ -1,8 +1,9 @@
-import React, {useCallback, useEffect} from 'react';
-import {connect, useDispatch} from 'react-redux';
-import {Box, Button, Grid, List, ListItemText, Typography, Snackbar, Alert, IconButton} from "@mui/material";
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {Box, Button, Grid, List, ListItemText, Typography, ButtonGroup} from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import CloseIcon from '@mui/icons-material/Close';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
 
@@ -15,6 +16,10 @@ import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
 const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
+    const [openInfo, setOpenInfo] = React.useState(false);
+    const [openSignUp, setOpenSignUp] = React.useState(false);
+    const [openDeleteUser, setOpenDeleteUser] = React.useState(false);
+
     useEffect(() => {
         fetchUsers()
     },[]);
@@ -25,10 +30,6 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         }
     },[info]);
 
-    const [openInfo, setOpenInfo] = React.useState(false);
-    const [openSignUp, setOpenSignUp] = React.useState(false);
-    const [openDeleteUser, setOpenDeleteUser] = React.useState(false);
-
     const handleOpen = (type) => {
         if(type === 'SignUp') {
             setOpenSignUp(true);
@@ -38,6 +39,7 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
             setOpenInfo(true);
         }
     };
+
     const handleClose = (type) => {
         if(type === 'SignUp') {
             setOpenSignUp(false);
@@ -49,17 +51,16 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
     };
 
     return (
-        <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }}>
+        <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }} >
             <TopNavigator handleOpen={() => {handleOpen('SignUp')}}/>
 
             <Offset id='top'/>
 
-            <Grid container sx={{display:"flex"}}>
+            <Grid container sx={{display:"flex"}} >
                 <Grid item xs={0} md={1}/>
-                <Grid item xs={12} md={10} sx={{padding: 2, backgroundColor: 'background.main'}}>
+                <Grid item xs={12} md={10} sx={{padding: 2, backgroundColor: 'background.main'}} >
                     <Box sx={{padding: 2}}>
-                        <Typography variant="h4" noWrap component="div" color="secondary"
-                            sx={{fontFamily:"Anton"}} >
+                        <Typography variant="h4" noWrap component="div" color="secondary" sx={{fontFamily:"Anton"}} >
                             RULES
                         </Typography>
                         <List sx={{fontFamily: 'NanumGothicRegular'}}>
@@ -71,25 +72,29 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                             <ListItemText sx={{textAlign: "left"}} primary="6. Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다."/>
                         </List>
                     </Box>
+
                     <Offset id="ranking"/>
+
                     <Box sx={{padding: 2}}>
-                        <Typography variant="h4" noWrap component="div" color="secondary"
-                            sx={{fontFamily:"Anton"}} >
+                        <Typography variant="h4" noWrap component="div" color="secondary" sx={{fontFamily:"Anton"}} >
                             RANKING
                         </Typography>
 
-                        <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden", fontFamily: 'NanumGothicRegular'}} >
-                            <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left"}}
-                                    startIcon={<RefreshIcon/>}>
+                        <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
+                            <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}} startIcon={<RefreshIcon/>} >
                                 새로고침
                             </Button>
-                            <Button  color="error" variant='outlined' sx={{float: "right"}}
-                                     onClick={() => {handleOpen('DeleteUser')}}>
-                                사용자 제거
-                            </Button>
+                            <ButtonGroup sx={{float: "right"}} variant='outlined'>
+                                <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<AddOutlinedIcon/>}>
+                                    사용자 등록
+                                </Button>
+                                <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<RemoveOutlinedIcon/>} >
+                                    사용자 제거
+                                </Button>
+                            </ButtonGroup>
                         </Box>
 
-                        <RankTable users = {users} usersLoading = {usersLoading}/>
+                        <RankTable users={users} usersLoading={usersLoading}/>
                     </Box>
                 </Grid>
                 <Grid item xs={0} md={10}/>
