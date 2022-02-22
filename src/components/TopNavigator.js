@@ -43,7 +43,7 @@ const TopNavigator = ({handleOpen}) => {
                             <Button size="large" color="primary" href="#ranking">
                                 RANKING
                             </Button>
-                            <Button size="large" color="point" variant='text' onClick={handleOpen} endIcon={<PersonAddAltIcon/>}>
+                            <Button size="large" color="point" variant='text' onClick={handleOpen} sx={{fontFamily:"NanumGothicExtraBold"}} endIcon={<PersonAddAltIcon/>}>
                                 사용자 등록
                             </Button>
                         </Box>
@@ -114,9 +114,10 @@ const TopNavigator = ({handleOpen}) => {
                                         'transition': "none",
                                         '&:hover': {
                                             backgroundColor: 'transparent'
-                                        }
+                                        },
+                                        fontFamily: 'NanumGothicExtraBold'
                                     }}>
-                                        SIGN UP
+                                        사용자 등록
                                     </Button>
                                 </MenuItem>
                             </Menu>
