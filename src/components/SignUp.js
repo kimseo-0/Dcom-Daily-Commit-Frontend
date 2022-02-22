@@ -1,26 +1,59 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dialog, DialogTitle, DialogContent, Button, IconButton, Typography, Alert, Box, TextField, CircularProgress } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
+const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
     const [account, setAccount] = useState({
         githubId: "",
         accessCode: "",
         userCode: "",
         korName: "",
     });
+    const [submitValid, setSubmitValid] = useState(false);
+    const [userCodeValid, setUserCodeValid] = useState(false);
+    const [openInfo, setOpenInfo] = React.useState(false);
+
+    useEffect(() => {
+        if (info.type !== null) {
+            setOpenInfo(true)
+        }
+    },[info]);
 
     const onChangeAccount = (e) => {
-        setAccount({
-            ...account,
-            [e.target.id]: e.target.value,
-        });
+        if (e.target.id === 'userCode') {
+            if ( e.target.value.length === 4 ) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value,
+                });
+                setUserCodeValid(true);
+            }
+            else if (e.target.value.length < 4) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value.replace(/[^0-9]/g, ""),
+                });
+                setUserCodeValid(false);
+            }
+            else {
+                setUserCodeValid(true);
+            }
+        } else {
+            setAccount({
+                ...account,
+                [e.target.id]: e.target.value,
+            });
+        }
+        if (account.githubId !=='' && account.korName !== '' && account.userCode !== '' && account.accessCode !== '') {
+            setSubmitValid(true)
+        } else {
+            setSubmitValid(true)
+        }
     };
 
     const submitForm = () => {
-        if (account.githubId !== "" && account.accessCode !== "" && account.korName !== "" ) {
+        if (submitValid) {
             addUser(account);
-            handleClose();
         }
     }
 
@@ -38,31 +71,47 @@ const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers sx={{padding: 1}}>
+
                     <Box
                         component="form" noValidate autoComplete="off" maxWidth="sm"
-                        sx={{ margin: 4, marginTop: 2, width: {sm : 450}}} >
-                        <Alert severity="info" sx={{fontFamily: "Anton"}}>
-                            Access Code는 단톡방에서 확인할 수 있으며 <br/>
-                            User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
-                        </Alert>
-
-                        <Box sx={{marginTop:1, marginBottom:4}}>
+                        sx={{ margin: 4, marginTop: 0, marginBottom: 2, width: {sm : 450}}} >
+                        {   openInfo ?
+                            <Alert severity="error" sx={{fontFamily: "Anton", marginTop: 2}} >
+                                {info.message}
+                            </Alert>
+                            :
+                            ""
+                        }
+                        <Box sx={{marginTop: 1, marginBottom: 1}}>
                             <TextField required id="githubId" label="Github Id" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="korName" label="Name" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary'/>
+                        </Box>
+                        <Box sx={{marginTop: 1, marginBottom: 2}}>
+                            <Alert severity="info" sx={{fontFamily: "Anton"}}>
+                                Access Code는 단톡방에서 확인할 수 있습니다.
+                            </Alert>
                             <TextField required id="accessCode" label="Access Code" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary'/>
-                            <TextField id="userCode" label="User Code" helperText="사용자 제거 시 사용됩니다." onChange={onChangeAccount}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary'/>
+                        </Box>
+                        <Box sx={{marginTop: 1, marginBottom: 2}}>
+                            <Alert severity="info" sx={{fontFamily: "Anton"}}>
+                                User Code는 사용자 삭제시 사용됩니다.<br/>
+                                User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
+                            </Alert>
+                            <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid && account.userCode.length !== 0}
+                                       helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 
-                        <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading} color="success" sx={{fontFamily:"NanumGothicExtraBold"}}>
-                            {addUserLoading ?
-                                <CircularProgress color='inherit'/>
-                            :
-                                "사용자 등록"
-                            }
+                        <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading || (!submitValid || !userCodeValid)}
+                                color="success" sx={{fontFamily:"NanumGothicExtraBold"}}>
+                                {addUserLoading ?
+                                    <CircularProgress color='inherit'/>
+                                :
+                                    "사용자 등록"
+                                }
                         </Button>
                     </Box>
                 </DialogContent>
