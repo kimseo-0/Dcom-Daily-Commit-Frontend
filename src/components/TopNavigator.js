@@ -9,7 +9,7 @@ import logo from '../logo192.png'
 
 
 const TopNavigator = ({handleOpen}) => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = React.useState(false);
 
     const handleNavOpen = (event) => {
         setAnchorEl(event.currentTarget);
