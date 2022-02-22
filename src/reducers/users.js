@@ -10,9 +10,13 @@ export const UPDATE_DELETE_USER = "UPDATE_DELETE_USER";
 export const UPDATE_USERS = "UPDATE_USERS";
 
 export const ERROR_USERS = "ERROR_USERS"
+export const ERROR_SIGN_UP = "ERROR_SIGN_UP"
+export const ERROR_DELETE_USER = "ERROR_DELETE_USER"
 
 const initialState = {
     info: {type: null, message: null},
+    signUpInfo: {type: null, message: null},
+    deleteUserInfo: {type: null, message: null},
     usersLoading: true,
     addUserLoading: false,
     deleteUserLoading: false,
@@ -42,7 +46,6 @@ function users(state = initialState, action) {
         case UPDATE_ADD_USER:
             return produce(state, draft => {
                 draft.info = {type: "success", message: "Success Sign up!"}
-                draft.usersLoading = false
                 draft.addUserLoading = false
                 draft.users.push(action.data.user);
             });
@@ -52,7 +55,6 @@ function users(state = initialState, action) {
             });
             return produce(state, draft => {
                 draft.info = {type: "success", message: "Success Delete user!"}
-                draft.usersLoading = false
                 draft.deleteUserLoading = false
                 draft.users.splice(deleteIndex, 1)
             });
@@ -65,7 +67,17 @@ function users(state = initialState, action) {
             return produce(state, draft => {
                 draft.info = {type: "error", message: action.data.message}
                 draft.usersLoading = false
+            });
+        case ERROR_SIGN_UP:
+            return produce(state, draft => {
+                draft.signUpInfo = {type: "error", message: action.data.message}
+                draft.usersLoading = false
                 draft.addUserLoading = false
+            });
+        case ERROR_DELETE_USER:
+            return produce(state, draft => {
+                draft.deleteUserInfo = {type: "error", message: action.data.message}
+                draft.usersLoading = false
                 draft.deleteUserLoading = false
             });
         default:

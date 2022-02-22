@@ -1,7 +1,7 @@
 import {
     FETCH_USERS, UPDATE_USERS,
-    ADD_USER, UPDATE_ADD_USER,
-    UPDATE_DELETE_USER, ERROR_USERS
+    ADD_USER, UPDATE_ADD_USER, UPDATE_DELETE_USER,
+    ERROR_USERS, ERROR_SIGN_UP, ERROR_DELETE_USER
 } from '../reducers/users'
 import {call, takeEvery, all, fork, put} from "redux-saga/effects";
 import axios from "axios";
@@ -73,7 +73,16 @@ function* addUser(action) {
         yield put({type: UPDATE_ADD_USER, data: {user : user}})
     } catch (e) {
         console.error(e);
-        yield put({type: ERROR_USERS, data: {message : 'Error sign up error'}})
+        const data = e.response.data;
+        if (data.code === 'REG-001') {
+            yield put({type: ERROR_SIGN_UP, data: {message : '존재 하지 않는 Github Id 입니다.'}});
+        } else if (data.code === 'REG-002') {
+            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 Access Code 입니다.'}});
+        } else if (data.code === 'REG-003') {
+            yield put({type: ERROR_SIGN_UP, data: {message : '이미 존재하는 Github Id 입니다.'}});
+        } else if (data.code === 'COM-001') {
+            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 입력 입니다.'}});
+        }
     }
 }
 
@@ -85,7 +94,14 @@ function* deleteUser(action) {
         yield put({type: UPDATE_DELETE_USER, data: {githubId : githubId}})
     } catch (e) {
         console.error(e);
-        yield put({type: ERROR_USERS, data: {message : 'Error delete user error'}})
+        const data = e.response.data;
+        if (data.code === 'DEL-001') {
+            yield put({type: ERROR_DELETE_USER, data: {message : '존재 하지 않는 Github Id 입니다.'}});
+        } else if (data.code === 'DEL-002') {
+            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 User Code 입니다.'}});
+        } else if (data.code === 'COM-001') {
+            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 입력 입니다.'}});
+        }
     }
 }
 
