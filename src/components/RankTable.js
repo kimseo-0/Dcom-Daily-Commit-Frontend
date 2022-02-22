@@ -9,7 +9,7 @@ const RankTable = ({users, usersLoading}) => {
             {
                 usersLoading ?
                     <Card sx={{padding: 5, textAlign:"center"}}>
-                        <CircularProgress sx={{}} color="primary" />
+                        <CircularProgress sx={{}} color="secondary" />
                     </Card>
                         :
                     users === undefined || users.length === 0 ?
