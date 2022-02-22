@@ -39,23 +39,24 @@ const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
                 <DialogContent dividers sx={{padding: 1}}>
                     <Box
                         component="form" noValidate autoComplete="off" maxWidth="sm"
-                        sx={{ margin: 4, width: {sm : 450}}} >
+                        sx={{ margin: 4, marginTop: 2, width: {sm : 450}}} >
                         <Alert severity="info" sx={{fontFamily: "Anton"}}>
-                            Access Code는 단톡방에서 확인할 수 있으며 User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
+                            Access Code는 단톡방에서 확인할 수 있으며 <br/>
+                            User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
                         </Alert>
 
                         <Box sx={{marginTop:1, marginBottom:4}}>
                             <TextField required id="githubId" label="Github Id" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
-                            <TextField required id="accessCode" label="Access Code" onChange={onChangeAccount}
-                                       variant="standard" fullWidth margin={"dense"} />
                             <TextField required id="korName" label="Name" onChange={onChangeAccount}
-                                       variant="standard" fullWidth margin={"dense"} />
-                            {/*<TextField id="userCode" label="사용자 제거 시 사용할 User Code" onChange={onChangeAccount}*/}
-                            {/*           variant="standard" fullWidth margin={"dense"} />*/}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary'/>
+                            <TextField required id="accessCode" label="Access Code" onChange={onChangeAccount}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary'/>
+                            <TextField id="userCode" label="User Code" helperText="사용자 제거 시 사용됩니다." onChange={onChangeAccount}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary'/>
                         </Box>
 
-                        <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading}>
+                        <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading} color="success" sx={{fontFamily:"NanumGothicExtraBold"}}>
                             {addUserLoading ?
                                 <CircularProgress color='inherit'/>
                             :
