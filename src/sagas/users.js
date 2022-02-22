@@ -22,7 +22,9 @@ function addUsersAPI(data) {
          {
             params: {
                 githubId: data.githubId,
-                korName: data.korName
+                korName: data.korName,
+                accessCode: data.accessCode,
+                userCode: data.userCode,
             },
              withCredentials: true
          });
@@ -31,7 +33,10 @@ function addUsersAPI(data) {
 function deleteUsersAPI(data) {
     return axios.post('/api/delete-user', null,
          {
-            params: {githubId: data.githubId},
+            params: {
+                githubId: data.githubId,
+                userCode: data.userCode
+            },
              withCredentials: true
          },
         );

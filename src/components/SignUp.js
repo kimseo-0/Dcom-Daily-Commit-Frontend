@@ -6,6 +6,7 @@ const SignUp = ({open, handleClose, addUser, addUserLoading}) => {
     const [account, setAccount] = useState({
         githubId: "",
         accessCode: "",
+        userCode: "",
         korName: "",
     });
 
