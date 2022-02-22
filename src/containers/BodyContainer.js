@@ -14,7 +14,7 @@ import SignUp from "../components/SignUp";
 import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
-const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
+const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
     useEffect(() => {
         fetchUsers()
     },[]);
@@ -99,14 +99,16 @@ const BodyContainer = ({ info, users, usersLoading, addUserLoading, deleteUserLo
 
             <BottomNavigator/>
 
-            <SignUp open={openSignUp} handleClose={() => {handleClose('SignUp')}} addUser={(data) => {addUser(data)}} addUserLoading={addUserLoading} />
-            <Withdrawal open={openDeleteUser} handleClose={() => {handleClose('DeleteUser')}} deleteUser={(data) => {deleteUser(data)}} deleteUserLoading={deleteUserLoading} />
+            <SignUp info={signUpInfo} open={openSignUp} handleClose={() => {handleClose('SignUp')}} addUser={(data) => {addUser(data)}} addUserLoading={addUserLoading} />
+            <Withdrawal info={deleteUserInfo} open={openDeleteUser} handleClose={() => {handleClose('DeleteUser')}} deleteUser={(data) => {deleteUser(data)}} deleteUserLoading={deleteUserLoading} />
         </Box>
     );
 };
 
 const mapStateToProps = state => ({
     info : state.user.info,
+    signUpInfo : state.user.signUpInfo,
+    deleteUserInfo : state.user.deleteUserInfo,
     usersLoading : state.user.usersLoading,
     addUserLoading: state.user.addUserLoading,
     deleteUserLoading: state.user.deleteUserLoading,
