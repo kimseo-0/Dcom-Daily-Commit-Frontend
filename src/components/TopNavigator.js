@@ -1,20 +1,17 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {AppBar, Box, Typography, Toolbar, Button, Grid, IconButton, Menu, MenuItem} from '@mui/material';
-import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../logo192.png'
 
 
-const TopNavigator = ({handleOpen}) => {
+const TopNavigator = ({}) => {
     const [anchorEl, setAnchorEl] = React.useState(false);
 
-    const handleNavOpen = (event) => {
+    const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleNavClose = () => {
+    const handleMenuClose = () => {
         setAnchorEl(null);
     };
 
@@ -43,20 +40,17 @@ const TopNavigator = ({handleOpen}) => {
                             <Button size="large" color="primary" href="#ranking">
                                 RANKING
                             </Button>
-                            <Button size="large" color="point" variant='text' onClick={handleOpen} sx={{fontFamily:"NanumGothicExtraBold"}} endIcon={<PersonAddAltIcon/>}>
-                                사용자 등록
-                            </Button>
                         </Box>
                         <Box sx={{float: "right", display: {xs: 'flex', md: 'none'}}}>
-                            <IconButton size='large' color='primary' onClick={handleNavOpen}>
+                            <IconButton size='large' color='primary' onClick={handleMenuOpen}>
                                 <MenuIcon/>
                             </IconButton>
                             <Menu
                                 anchorEl={anchorEl}
                                 id="account-menu"
                                 open={anchorEl}
-                                onClose={handleNavClose}
-                                onClick={handleNavClose}
+                                onClose={handleMenuClose}
+                                onClick={handleMenuClose}
                                 PaperProps={{
                                     elevation: 0,
                                     sx: {
@@ -86,7 +80,7 @@ const TopNavigator = ({handleOpen}) => {
                                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                             >
-                                <MenuItem onClick={handleNavClose}>
+                                <MenuItem onClick={handleMenuClose}>
                                     <Button size="large" color="secondary" href="#top" disableRipple sx={{
                                         'background-color': 'transparent',
                                         'transition': "none",
@@ -97,7 +91,7 @@ const TopNavigator = ({handleOpen}) => {
                                     RULES
                                     </Button>
                                 </MenuItem>
-                                <MenuItem onClick={handleNavClose}>
+                                <MenuItem onClick={handleMenuClose}>
                                     <Button size="large" color="secondary" href="#ranking" disableRipple sx={{
                                         'background-color': 'transparent',
                                         'transition': "none",
@@ -106,18 +100,6 @@ const TopNavigator = ({handleOpen}) => {
                                         }
                                     }}>
                                         RANKING
-                                    </Button>
-                                </MenuItem>
-                                <MenuItem onClick={handleNavClose}>
-                                    <Button size="large" color="point" variant='text' onClick={handleOpen} endIcon={<PersonAddAltIcon/>} disableRipple sx={{
-                                        'background-color': 'transparent',
-                                        'transition': "none",
-                                        '&:hover': {
-                                            backgroundColor: 'transparent'
-                                        },
-                                        fontFamily: 'NanumGothicExtraBold'
-                                    }}>
-                                        사용자 등록
                                     </Button>
                                 </MenuItem>
                             </Menu>
