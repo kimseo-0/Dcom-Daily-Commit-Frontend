@@ -66,7 +66,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                         User Delete
                     </Typography>
                     <IconButton onClick={handleClose}
-                        sx={{ position: 'absolute', right: 8, top: 8, color: 'button.main'}} >
+                        sx={{ position: 'absolute', right: 8, top: 8, color: 'close'}} >
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -74,23 +74,23 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                     <Box component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, marginTop: 2, width: {sm : 450}}} >
                         {   openInfo ?
-                            <Alert severity="error" sx={{fontFamily: "Anton", marginTop: 2}} >
+                            <Alert severity="error" variant='filled' sx={{fontFamily: "Anton", marginTop: 2}} >
                                 {info.message}
                             </Alert>
                             :
                             ""
                         }
-                        <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
-                            사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
-                        </Alert>
-
                         <Box sx={{marginBottom:4}}>
-                            <TextField required id="githubId" label="Github Id" onChange={onChangeAccount}
+                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid && account.userCode.length !== 0}
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
+
+                        <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
+                            사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
+                        </Alert>
 
                         <Button onClick={submitForm} variant="contained" fullWidth color='error' disabled={deleteUserLoading || (!submitValid || !userCodeValid)}
                                 sx={{fontFamily:"NanumGothicExtraBold"}}>
