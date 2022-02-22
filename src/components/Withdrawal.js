@@ -39,7 +39,7 @@ const Withdrawal = ({open, handleClose, deleteUser, deleteUserLoading}) => {
                 </DialogTitle>
                 <DialogContent dividers>
                     <Box component="form" noValidate autoComplete="off" maxWidth="sm"
-                        sx={{ margin: 4, width: {sm : 450}}} >
+                        sx={{ margin: 4, marginTop: 2, width: {sm : 450}}} >
                         <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
                             사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
                         </Alert>
@@ -51,7 +51,7 @@ const Withdrawal = ({open, handleClose, deleteUser, deleteUserLoading}) => {
                                        variant="standard" fullWidth margin={"dense"} />
                         </Box>
 
-                        <Button onClick={submitForm} variant="contained" fullWidth color='error'>
+                        <Button onClick={submitForm} variant="contained" fullWidth color='error' sx={{fontFamily:"NanumGothicExtraBold"}}>
                             {deleteUserLoading ?
                                 <CircularProgress color='inherit'/>
                                 :
