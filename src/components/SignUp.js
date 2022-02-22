@@ -66,7 +66,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                     </Typography>
                     <IconButton onClick={handleClose}
                         sx={{ position: 'absolute', right: 8, top: 8,
-                            color: 'button.main' }} >
+                            color: 'close' }} >
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -76,14 +76,14 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                         component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, marginTop: 0, marginBottom: 2, width: {sm : 450}}} >
                         {   openInfo ?
-                            <Alert severity="error" sx={{fontFamily: "Anton", marginTop: 2}} >
+                            <Alert severity="error" variant='filled' sx={{fontFamily: "Anton", marginTop: 2}} >
                                 {info.message}
                             </Alert>
                             :
                             ""
                         }
                         <Box sx={{marginTop: 1, marginBottom: 1}}>
-                            <TextField required id="githubId" label="Github Id" onChange={onChangeAccount}
+                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="korName" label="Name" onChange={onChangeAccount}
                                        variant="standard" fullWidth margin={"dense"} color='secondary'/>
