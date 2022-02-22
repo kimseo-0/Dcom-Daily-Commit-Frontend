@@ -18,11 +18,19 @@ const theme = createTheme({
         },
         point: {
             main: '#FD8C73',
-            // blue: '#FD8C73',
 
         },
         button: {
             main: '#C6C6C6'
+        },
+        close: {
+            main: '#C6C6C6',
+        },
+        add: {
+            main: '#526ab2'
+        },
+        delete: {
+            main: '#db5151'
         }
     },
 });
