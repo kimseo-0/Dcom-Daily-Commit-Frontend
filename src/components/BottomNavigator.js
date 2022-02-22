@@ -10,30 +10,30 @@ const BottomNavigator = () => {
             paddingRight: {xs: 0, md: 14}}}>
             <Box sx={{padding: 4, textAlign: 'center', fontSize: 14}}>
                 <Box sx={{padding: 2}}>
-                    <Typography sx={{fontSize: 14}}>
+                    <Typography sx={{fontSize: 14, fontFamily: 'NanumGothicRegular'}}>
                         사이트에 문제가 있거나 기여하고 싶다면?
                     </Typography>
 
-                    <Link underline="hover" sx={{marginRight: 1, color: 'point.main'}} href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
+                    <Link underline="hover" sx={{marginRight: 1, color: 'point.main', fontFamily: 'NanumGothicRegular'}} href="https://github.com/kimseo-0/Dcom-Daily-Commit-Frontend">
                         FrontEnd
                     </Link>
                     |
-                    <Link underline="hover" sx={{marginLeft: 1, color: 'point.main'}}  href="https://github.com/BambooKim/DcomDailyCommitBackend">
+                    <Link underline="hover" sx={{marginLeft: 1, color: 'point.main', fontFamily: 'NanumGothicRegular'}}  href="https://github.com/BambooKim/DcomDailyCommitBackend">
                         BackEnd
                     </Link>
                 </Box>
-                <Typography sx={{fontSize: 14}}>
+                <Typography sx={{fontSize: 14, fontFamily: 'NanumGothicRegular'}}>
                     Made by
                     <IconButton sx={{marginLeft: 1}} href="https://github.com/BambooKim/">
                         <GitHubIcon/>
                     </IconButton>
-                    <Link underline="hover" sx={{ color: 'secondary.main'}}  href="https://github.com/BambooKim/">
+                    <Link underline="hover" sx={{ color: 'secondary.main', fontFamily: 'NanumGothicRegular'}}  href="https://github.com/BambooKim/">
                         BambooKim
                     </Link>
                     <IconButton sx={{marginLeft: 1}} href="https://github.com/kimseo-0/">
                         <GitHubIcon/>
                     </IconButton>
-                    <Link underline="hover" sx={{ color: 'secondary.main'}}  href="https://github.com/kimseo-0/">
+                    <Link underline="hover" sx={{ color: 'secondary.main', fontFamily: 'NanumGothicRegular'}}  href="https://github.com/kimseo-0/">
                         kimseo-0
                     </Link>
                 </Typography>
