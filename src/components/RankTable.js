@@ -35,7 +35,7 @@ const RankTable = ({users, usersLoading}) => {
                             <TableBody>
                                 {users.map((user, index) => (
                                     <TableRow key={user.rank}>
-                                        <TableCell component="th" scope="row" align='center'>
+                                        <TableCell component="th" scope="row" align='center' sx={{fontFamily:"NanumGothicRegular"}}>
                                             {index === 0 ?
                                                 'TOP'
                                                 :
@@ -43,16 +43,16 @@ const RankTable = ({users, usersLoading}) => {
 
                                             }
                                         </TableCell>
-                                        <TableCell align="left">
-                                            <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{fontFamily: 'NanumGothicRegular', borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
+                                        <TableCell align="left" sx={{fontFamily:"NanumGothicRegular"}}>
+                                            <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{ borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
                                                     startIcon={<Avatar alt={user.id} src={user.userImg} sx={{border:1, borderColor: 'background.light'}} />}>
                                                 {user.name}
                                             </Button>
                                         </TableCell>
-                                        <TableCell align="center">{user.commitsInARow}일</TableCell>
-                                        <TableCell align="center">{user.participationRate}일</TableCell>
-                                        <TableCell align="center">{user.unpaidFine}원</TableCell>
-                                        <TableCell align="center">{user.paidFine}원</TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.commitsInARow}일</TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.participationRate}일</TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.unpaidFine}원</TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.paidFine}원</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

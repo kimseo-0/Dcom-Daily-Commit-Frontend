@@ -36,7 +36,7 @@ const TopNavigator = ({isMobile}) => {
 
                         <Box sx={{ flexGrow: 1 }}/>
 
-                        <Box sx={{float: "right",  display: {xs: 'none', md: 'flex'}}}>
+                        <Box sx={{float: "right",  padding: 1, display: {xs: 'none', md: 'flex'}}}>
                             <Button size="large" color="primary" href="#top">
                                 RULES
                             </Button>
