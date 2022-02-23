@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 import {AppBar, Box, Typography, Toolbar, Button, Grid, IconButton, Menu, MenuItem} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -6,13 +6,13 @@ import logo from '../logo192.png'
 
 
 const TopNavigator = ({isMobile}) => {
-    const [anchorEl, setAnchorEl] = React.useState(false);
+    const [anchorEl, setAnchorEl] = useState(false);
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleMenuClose = () => {
-        setAnchorEl(null);
+        setAnchorEl(false);
     };
 
     return (
@@ -29,7 +29,7 @@ const TopNavigator = ({isMobile}) => {
                                     <img src={logo} alt="" style={{height: 30, marginTop:2}}/>
                                 </Box>
                                 :
-                                <Typography variant="h4" noWrap component="div" color="primary" sx={{fontFamily:"Anton", display: {float: "left"}}}  >
+                                <Typography variant="h4" noWrap component="div" color="primary" sx={{fontFamily:"Anton", padding: 1, display: {float: "left"}}}  >
                                     D.com Daily Commit
                                 </Typography>
                         }

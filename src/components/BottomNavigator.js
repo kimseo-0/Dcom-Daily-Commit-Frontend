@@ -24,13 +24,13 @@ const BottomNavigator = () => {
                 </Box>
                 <Typography sx={{fontSize: 14, fontFamily: 'NanumGothicRegular'}}>
                     Made by
-                    <IconButton sx={{marginLeft: 1}} href="https://github.com/BambooKim/">
+                    <IconButton disabled  sx={{marginLeft: 1, '&:hover': {backgroundColor : 'transparent'}}}>
                         <GitHubIcon/>
                     </IconButton>
                     <Link underline="hover" sx={{ color: 'secondary.main', fontFamily: 'NanumGothicRegular'}}  href="https://github.com/BambooKim/">
                         BambooKim
                     </Link>
-                    <IconButton sx={{marginLeft: 1}} href="https://github.com/kimseo-0/">
+                    <IconButton disabled sx={{marginLeft: 1, '&:hover': {backgroundColor : 'transparent'}}}>
                         <GitHubIcon/>
                     </IconButton>
                     <Link underline="hover" sx={{ color: 'secondary.main', fontFamily: 'NanumGothicRegular'}}  href="https://github.com/kimseo-0/">

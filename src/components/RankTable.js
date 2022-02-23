@@ -1,6 +1,9 @@
 import React from 'react';
-import {Box, Card, Avatar, CircularProgress, IconButton, Typography,
-        Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
+import {
+    Box, Card, Avatar, CircularProgress, IconButton, Typography, Link, Chip,
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button
+} from '@mui/material';
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 
 const RankTable = ({users, usersLoading}) => {
@@ -41,16 +44,24 @@ const RankTable = ({users, usersLoading}) => {
                                             }
                                         </TableCell>
                                         <TableCell align="left">
-                                            <IconButton href={"https://github.com/" + user.id} sx={{marginRight: 1}}>
-                                                <Avatar alt={user.id} src={user.userImg}
-                                                        sx={{border: 1, borderColor: "background.light"}} />
-                                            </IconButton>
-                                            <Typography
-                                                component="span"
-                                                sx={{fontSize: 14}}
-                                            >
+                                            {/*<Link href={"https://github.com/" + user.id} color='secondary' underline="hover">*/}
+                                            {/*    <IconButton sx={{marginRight: 1}}>*/}
+                                            {/*        <Avatar alt={user.id} src={user.userImg}*/}
+                                            {/*                sx={{border: 1, borderColor: "background.light"}} />*/}
+                                            {/*    </IconButton>*/}
+                                            {/*    {user.name}*/}
+                                            {/*    /!*<Typography*!/*/}
+                                            {/*    /!*    color=''*!/*/}
+                                            {/*    /!*    component="span"*!/*/}
+                                            {/*    /!*    sx={{fontSize: 14}}*!/*/}
+                                            {/*    /!*>*!/*/}
+                                            {/*    /!*    {user.name}*!/*/}
+                                            {/*    /!*</Typography>*!/*/}
+                                            {/*</Link>*/}
+                                            <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{fontFamily: 'NanumGothicRegular', borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
+                                                    startIcon={<Avatar alt={user.id} src={user.userImg} sx={{border:1, borderColor: 'background.light'}} />}>
                                                 {user.name}
-                                            </Typography>
+                                            </Button>
                                         </TableCell>
                                         <TableCell align="center">{user.commitsInARow}일</TableCell>
                                         <TableCell align="center">{user.participationRate}일</TableCell>

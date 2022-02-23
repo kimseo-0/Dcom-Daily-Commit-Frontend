@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Dialog, DialogTitle, DialogContent,
-    Button, IconButton, Typography, Alert, Box, TextField, CircularProgress
+    Button, IconButton, Typography, Alert, Box, TextField, CircularProgress, Checkbox
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -10,9 +10,10 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
         githubId: "",
         userCode: ""
     });
+    const [checked, setChecked] = useState(true);
     const [submitValid, setSubmitValid] = useState(false);
     const [userCodeValid, setUserCodeValid] = useState(false);
-    const [openInfo, setOpenInfo] = React.useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
 
     useEffect(() => {
         if (info.type !== null) {
@@ -50,6 +51,10 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
         } else {
             setSubmitValid(true)
         }
+    };
+
+    const onChangeChecked = (e) => {
+        setChecked(e.target.checked);
     };
 
     const submitForm = () => {
@@ -97,6 +102,11 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
 
                         <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
                             사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
+                            {/*<Checkbox*/}
+                            {/*    checked={checked}*/}
+                            {/*    onChange={onChangeChecked}*/}
+                            {/*    inputProps={{ 'aria-label': 'controlled' }}*/}
+                            {/*/>*/}
                         </Alert>
 
                         <Button onClick={submitForm} variant="contained" fullWidth color='error' disabled={deleteUserLoading || (!submitValid || !userCodeValid)}

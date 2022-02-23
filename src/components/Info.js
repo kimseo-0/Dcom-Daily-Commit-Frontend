@@ -6,6 +6,7 @@ const Info = ({open, info, handleInfoClose}) => {
     return (
         <Snackbar
             open={open}
+            anchorOrigin={{ vertical : 'top', horizontal: 'center' }}
             autoHideDuration={2500}
             onClose={handleInfoClose}
         >
