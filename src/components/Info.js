@@ -1,8 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {
-    Box, Card, Avatar, CircularProgress, IconButton, Typography,
-    Table, TableBody, TableCell, TableContainer, TableHead, Collapse, Alert, Snackbar
-} from '@mui/material';
+import React from 'react';
+import { IconButton, Alert, Snackbar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Info = ({open, info, handleInfoClose}) => {

@@ -58,14 +58,21 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
         }
     }
 
+    const clearForm = () => {
+        setAccount({
+            githubId: "",
+            userCode: ""
+        })
+    }
+
     return (
-            <Dialog onClose={handleClose} open={open} >
+            <Dialog onClose={() => {handleClose(); clearForm(); }} open={open} >
                 <DialogTitle sx={{ m: 0, p: 2}}>
                     <Typography variant="h5" noWrap component="div" color="error"
                         sx={{fontFamily: "Anton", textAlign:'center'}} >
                         User Delete
                     </Typography>
-                    <IconButton onClick={handleClose}
+                    <IconButton onClick={() => {handleClose(); clearForm(); }}
                         sx={{ position: 'absolute', right: 8, top: 8, color: 'close'}} >
                         <CloseIcon />
                     </IconButton>
@@ -73,18 +80,18 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                 <DialogContent dividers>
                     <Box component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, marginTop: 2, width: {sm : 450}}} >
-                        {   openInfo ?
+                        {   openInfo && (info.type !== null) ?
                             <Alert severity="error" variant='filled' sx={{fontFamily: "Anton", marginTop: 2}} >
                                 {info.message}
                             </Alert>
                             :
-                            ""
+                            null
                         }
                         <Box sx={{marginBottom:4}}>
-                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount}
+                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount} focused={info.focus === "githubId"} error={info.focus === "githubId"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
-                            <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid && account.userCode.length !== 0}
+                            <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode} focused={info.focus === "userCode"}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={(!userCodeValid && account.userCode.length !== 0) || info.focus === "userCode"}
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 
@@ -97,7 +104,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                             {deleteUserLoading ?
                                 <CircularProgress color='inherit'/>
                                 :
-                                "사용자 제거"
+                                "사용자 삭제"
                             }
                         </Button>
                     </Box>

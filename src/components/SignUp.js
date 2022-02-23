@@ -57,14 +57,23 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
         }
     }
 
+    const clearForm = () => {
+        setAccount({
+            githubId: "",
+            accessCode: "",
+            userCode: "",
+            korName: "",
+        })
+    }
+
     return (
-            <Dialog onClose={handleClose} open={open} >
+            <Dialog onClose={() => {handleClose(); clearForm(); }} open={open} >
                 <DialogTitle sx={{ m: 0, p: 2}}>
                     <Typography variant="h5" noWrap component="div" color="secondary"
                         sx={{fontFamily: "Anton", textAlign:'center'}} >
                         Sign Up
                     </Typography>
-                    <IconButton onClick={handleClose}
+                    <IconButton onClick={() => {handleClose(); clearForm(); }}
                         sx={{ position: 'absolute', right: 8, top: 8,
                             color: 'close' }} >
                         <CloseIcon />
@@ -75,24 +84,24 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                     <Box
                         component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, marginTop: 0, marginBottom: 2, width: {sm : 450}}} >
-                        {   openInfo ?
+                        {   openInfo && (info.type !== null) ?
                             <Alert severity="error" variant='filled' sx={{fontFamily: "Anton", marginTop: 2}} >
                                 {info.message}
                             </Alert>
                             :
-                            ""
+                            null
                         }
                         <Box sx={{marginTop: 1, marginBottom: 1}}>
-                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount}
+                            <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount} focused={info.focus === "githubId"} error={info.focus === "githubId"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
-                            <TextField required id="korName" label="Name" onChange={onChangeAccount}
+                            <TextField required id="korName" label="Name" onChange={onChangeAccount} focused={info.focus === "korName"} error={info.focus === "korName"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary'/>
                         </Box>
                         <Box sx={{marginTop: 1, marginBottom: 2}}>
                             <Alert severity="info" sx={{fontFamily: "Anton"}}>
                                 Access Code는 단톡방에서 확인할 수 있습니다.
                             </Alert>
-                            <TextField required id="accessCode" label="Access Code" onChange={onChangeAccount}
+                            <TextField required id="accessCode" label="Access Code" onChange={onChangeAccount} focused={info.focus === "accessCode"} error={info.focus === "accessCode"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary'/>
                         </Box>
                         <Box sx={{marginTop: 1, marginBottom: 2}}>
@@ -100,8 +109,8 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                                 User Code는 사용자 삭제시 사용됩니다.<br/>
                                 User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
                             </Alert>
-                            <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid && account.userCode.length !== 0}
+                            <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode} focused={info.focus === "userCode"}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={(!userCodeValid && account.userCode.length !== 0) || info.focus === "userCode"}
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 

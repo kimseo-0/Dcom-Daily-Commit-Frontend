@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {Box, Button, Grid, List, ListItemText, Typography, ButtonGroup} from "@mui/material";
+import {Box, Button, Grid, List, ListItemText, Typography, ButtonGroup, IconButton} from "@mui/material";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonRemoveAlt1Icon from '@mui/icons-material/PersonRemoveAlt1';
 
-import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS} from "../reducers/users";
+import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS, CLEAR_INFO} from "../reducers/users";
 
 import Offset from "../components/Offset";
 import RankTable from "../components/RankTable";
@@ -15,10 +19,11 @@ import SignUp from "../components/SignUp";
 import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
-const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser}) => {
+const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser, clearInfo}) => {
     const [openInfo, setOpenInfo] = React.useState(false);
     const [openSignUp, setOpenSignUp] = React.useState(false);
     const [openDeleteUser, setOpenDeleteUser] = React.useState(false);
+    const IsMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
 
     useEffect(() => {
         fetchUsers()
@@ -27,6 +32,10 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
     useEffect(() => {
         if (info.type !== null) {
             handleOpen("info")
+            if (info.type !== 'error') {
+                setOpenSignUp(false);
+                setOpenDeleteUser(false);
+            }
         }
     },[info]);
 
@@ -47,12 +56,13 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
             setOpenDeleteUser(false);
         } else {
             setOpenInfo(false);
+            clearInfo()
         }
     };
 
     return (
         <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }} >
-            <TopNavigator handleOpen={() => {handleOpen('SignUp')}}/>
+            <TopNavigator isMobile={IsMobile}/>
 
             <Offset id='top'/>
 
@@ -81,16 +91,40 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                         </Typography>
 
                         <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
-                            <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}} startIcon={<RefreshIcon/>} >
-                                새로고침
-                            </Button>
+                            {
+                                !IsMobile
+                                    ?
+                                    <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}} startIcon={<RefreshIcon/>} >
+                                        새로고침
+                                    </Button>
+                                    :
+                                    <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}}>
+                                        <RefreshIcon/>
+                                    </Button>
+                            }
                             <ButtonGroup sx={{float: "right"}} variant='outlined'>
-                                <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<AddOutlinedIcon/>}>
-                                    사용자 등록
-                                </Button>
-                                <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<RemoveOutlinedIcon/>} >
-                                    사용자 제거
-                                </Button>
+                                {
+                                    !IsMobile
+                                        ?
+                                        <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<AddOutlinedIcon/>}>
+                                            사용자 등록
+                                        </Button>
+                                        :
+                                        <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}}>
+                                            <PersonAddAlt1Icon/>
+                                        </Button>
+                                }
+                                {
+                                    !IsMobile
+                                        ?
+                                        <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<RemoveOutlinedIcon/>} >
+                                            사용자 제거
+                                        </Button>
+                                        :
+                                        <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} >
+                                            <PersonRemoveAlt1Icon/>
+                                        </Button>
+                                }
                             </ButtonGroup>
                         </Box>
 
@@ -100,7 +134,10 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                 <Grid item xs={0} md={10}/>
             </Grid>
 
-            <Info open={openInfo} info={info} handleInfoClose={() => {handleClose('info')}}/>
+            {info.type !== null ?
+                <Info open={openInfo} info={info} handleInfoClose={() => {handleClose('info')}}/>
+                : null
+            }
 
             <BottomNavigator/>
 
@@ -136,6 +173,10 @@ const mapDispatchToProps = dispatch => ({
     deleteUser: (data) => {
         console.log('deleteUser');
         dispatch({type : DELETE_USER, data: data})
+    },
+    clearInfo: () => {
+        console.log('clearInfo');
+        dispatch({type : CLEAR_INFO})
     }
 });
 

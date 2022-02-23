@@ -5,7 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../logo192.png'
 
 
-const TopNavigator = ({}) => {
+const TopNavigator = ({isMobile}) => {
     const [anchorEl, setAnchorEl] = React.useState(false);
 
     const handleMenuOpen = (event) => {
@@ -19,17 +19,20 @@ const TopNavigator = ({}) => {
         <AppBar position="fixed"
                 sx={{backgroundColor: 'background.dark', height: 60}}
                 >
-            <Toolbar>
+            <Toolbar sx={{height: '100%'}}>
                 <Grid container>
                     <Grid item xs={0} md={1}/>
                     <Grid item xs={12} md={10} sx={{justifyItems: "center"}}>
-                        <Box sx={{display: {xs: 'flex', sm: 'none', float: "left", padding: 10}}} >
-                            <img src={logo} alt="" style={{height: 32}}/>
-                        </Box>
-                        <Typography variant="h4" noWrap component="div" color="primary"
-                            sx={{fontFamily:"Anton", display: {xs: 'none', sm: 'flex', float: "left"}}}  >
-                            D.com Daily Commit
-                        </Typography>
+                        {
+                            isMobile ?
+                                <Box sx={{display: {float: "left", padding: 10}}} >
+                                    <img src={logo} alt="" style={{height: 30, marginTop:2}}/>
+                                </Box>
+                                :
+                                <Typography variant="h4" noWrap component="div" color="primary" sx={{fontFamily:"Anton", display: {float: "left"}}}  >
+                                    D.com Daily Commit
+                                </Typography>
+                        }
 
                         <Box sx={{ flexGrow: 1 }}/>
 
@@ -42,7 +45,7 @@ const TopNavigator = ({}) => {
                             </Button>
                         </Box>
                         <Box sx={{float: "right", display: {xs: 'flex', md: 'none'}}}>
-                            <IconButton size='large' color='primary' onClick={handleMenuOpen}>
+                            <IconButton size='large' color='primary' onClick={handleMenuOpen} sx={{padding: 2}}>
                                 <MenuIcon/>
                             </IconButton>
                             <Menu
