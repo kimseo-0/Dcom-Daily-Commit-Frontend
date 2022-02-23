@@ -10,7 +10,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
         githubId: "",
         userCode: ""
     });
-    const [checked, setChecked] = useState(true);
+    const [checked, setChecked] = useState(false);
     const [submitValid, setSubmitValid] = useState(false);
     const [userCodeValid, setUserCodeValid] = useState(false);
     const [openInfo, setOpenInfo] = useState(false);
@@ -18,6 +18,8 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
     useEffect(() => {
         if (info.type !== null) {
             setOpenInfo(true)
+        } else {
+            clearForm();
         }
     },[info]);
 
@@ -58,7 +60,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
     };
 
     const submitForm = () => {
-        if (submitValid) {
+        if (submitValid && checked) {
             deleteUser(account);
         }
     }
@@ -68,6 +70,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
             githubId: "",
             userCode: ""
         })
+        setChecked(false);
     }
 
     return (
@@ -100,16 +103,20 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 
-                        <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}>
+                        <Alert severity="error" sx={{fontFamily: "Anton", marginBottom:2}}
+                               action={
+                                   <Checkbox
+                                       color='error'
+                                       checked={checked}
+                                       onChange={onChangeChecked}
+                                       inputProps={{ 'aria-label': 'controlled' }}
+                                   />
+                               }
+                        >
                             사용자 제거 시 모든 정보가 삭제되며 복구할 수 없습니다.
-                            {/*<Checkbox*/}
-                            {/*    checked={checked}*/}
-                            {/*    onChange={onChangeChecked}*/}
-                            {/*    inputProps={{ 'aria-label': 'controlled' }}*/}
-                            {/*/>*/}
                         </Alert>
 
-                        <Button onClick={submitForm} variant="contained" fullWidth color='error' disabled={deleteUserLoading || (!submitValid || !userCodeValid)}
+                        <Button onClick={submitForm} variant="contained" fullWidth color='error' disabled={deleteUserLoading || (!submitValid || !userCodeValid) || !checked}
                                 sx={{fontFamily:"NanumGothicExtraBold"}}>
                             {deleteUserLoading ?
                                 <CircularProgress color='inherit'/>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Box, Button, Grid, List, ListItemText, Typography, ButtonGroup, IconButton} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
@@ -20,9 +20,9 @@ import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
 const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser, clearInfo}) => {
-    const [openInfo, setOpenInfo] = React.useState(false);
-    const [openSignUp, setOpenSignUp] = React.useState(false);
-    const [openDeleteUser, setOpenDeleteUser] = React.useState(false);
+    const [openInfo, setOpenInfo] = useState(false);
+    const [openSignUp, setOpenSignUp] = useState(false);
+    const [openDeleteUser, setOpenDeleteUser] = useState(false);
     const IsMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
 
     useEffect(() => {

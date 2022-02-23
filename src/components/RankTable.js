@@ -44,20 +44,6 @@ const RankTable = ({users, usersLoading}) => {
                                             }
                                         </TableCell>
                                         <TableCell align="left">
-                                            {/*<Link href={"https://github.com/" + user.id} color='secondary' underline="hover">*/}
-                                            {/*    <IconButton sx={{marginRight: 1}}>*/}
-                                            {/*        <Avatar alt={user.id} src={user.userImg}*/}
-                                            {/*                sx={{border: 1, borderColor: "background.light"}} />*/}
-                                            {/*    </IconButton>*/}
-                                            {/*    {user.name}*/}
-                                            {/*    /!*<Typography*!/*/}
-                                            {/*    /!*    color=''*!/*/}
-                                            {/*    /!*    component="span"*!/*/}
-                                            {/*    /!*    sx={{fontSize: 14}}*!/*/}
-                                            {/*    /!*>*!/*/}
-                                            {/*    /!*    {user.name}*!/*/}
-                                            {/*    /!*</Typography>*!/*/}
-                                            {/*</Link>*/}
                                             <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{fontFamily: 'NanumGothicRegular', borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
                                                     startIcon={<Avatar alt={user.id} src={user.userImg} sx={{border:1, borderColor: 'background.light'}} />}>
                                                 {user.name}

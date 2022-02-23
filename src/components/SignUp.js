@@ -16,6 +16,8 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
     useEffect(() => {
         if (info.type !== null) {
             setOpenInfo(true)
+        } else {
+            clearForm();
         }
     },[info]);
 
