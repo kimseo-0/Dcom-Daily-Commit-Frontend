@@ -75,13 +75,13 @@ function* addUser(action) {
         console.error(e);
         const data = e.response.data;
         if (data.code === 'REG-001') {
-            yield put({type: ERROR_SIGN_UP, data: {message : '존재 하지 않는 Github Id 입니다.'}});
+            yield put({type: ERROR_SIGN_UP, data: {message : '존재 하지 않는 Github Id 입니다.', focus: 'githubId'}});
         } else if (data.code === 'REG-002') {
-            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 Access Code 입니다.'}});
+            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 Access Code 입니다.', focus: 'accessCode'}});
         } else if (data.code === 'REG-003') {
-            yield put({type: ERROR_SIGN_UP, data: {message : '이미 존재하는 Github Id 입니다.'}});
+            yield put({type: ERROR_SIGN_UP, data: {message : '이미 존재하는 Github Id 입니다.', focus: 'githubId'}});
         } else if (data.code === 'COM-001') {
-            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 입력 입니다.'}});
+            yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 입력 입니다.', focus: 'userCode'}});
         }
     }
 }
@@ -96,11 +96,11 @@ function* deleteUser(action) {
         console.error(e);
         const data = e.response.data;
         if (data.code === 'DEL-001') {
-            yield put({type: ERROR_DELETE_USER, data: {message : '존재 하지 않는 Github Id 입니다.'}});
+            yield put({type: ERROR_DELETE_USER, data: {message : '존재 하지 않는 Github Id 입니다.', focus: 'githubId'}});
         } else if (data.code === 'DEL-002') {
-            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 User Code 입니다.'}});
+            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 User Code 입니다.', focus: 'userCode'}});
         } else if (data.code === 'COM-001') {
-            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 입력 입니다.'}});
+            yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 입력 입니다.', focus: 'userCode'}});
         }
     }
 }
