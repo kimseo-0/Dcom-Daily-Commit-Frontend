@@ -3,8 +3,6 @@ import {
     Box, Card, Avatar, CircularProgress, IconButton, Typography, Link, Chip,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button
 } from '@mui/material';
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-
 
 const RankTable = ({users, usersLoading}) => {
     return (
@@ -49,9 +47,23 @@ const RankTable = ({users, usersLoading}) => {
                                                 {user.name}
                                             </Button>
                                         </TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.commitsInARow}일</TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.participationRate}일</TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.unpaidFine}원</TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                            { user.isCommitToday ?
+                                                parseInt(user.commitsInARow) + 1
+                                                :
+                                                user.commitsInARow
+                                            }일
+                                        </TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                            { user.isCommitToday ?
+                                                (parseInt(user.commitDayCount) + 1 )+ '/' + user.elapsedDay
+                                                :
+                                                user.commitDayCount + '/' + user.elapsedDay
+                                            } 일
+                                        </TableCell>
+                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                            {user.unpaidFine}원
+                                        </TableCell>
                                         <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.paidFine}원</TableCell>
                                     </TableRow>
                                 ))}

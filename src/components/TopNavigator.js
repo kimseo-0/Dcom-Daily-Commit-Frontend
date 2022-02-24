@@ -6,13 +6,16 @@ import logo from '../logo192.png'
 
 
 const TopNavigator = ({isMobile}) => {
-    const [anchorEl, setAnchorEl] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
+        setOpen(true);
     };
     const handleMenuClose = () => {
-        setAnchorEl(false);
+        setAnchorEl(null);
+        setOpen(false);
     };
 
     return (
@@ -23,16 +26,18 @@ const TopNavigator = ({isMobile}) => {
                 <Grid container>
                     <Grid item xs={0} md={1}/>
                     <Grid item xs={12} md={10} sx={{justifyItems: "center"}}>
-                        {
-                            isMobile ?
-                                <Box sx={{display: {float: "left", padding: 10}}} >
-                                    <img src={logo} alt="" style={{height: 30, marginTop:2}}/>
-                                </Box>
-                                :
-                                <Typography variant="h4" noWrap component="div" color="primary" sx={{fontFamily:"Anton", padding: 1, display: {float: "left"}}}  >
-                                    D.com Daily Commit
-                                </Typography>
-                        }
+                        <Box>
+                            {
+                                isMobile ?
+                                    <Box sx={{display: {float: "left", padding: 10}}} >
+                                        <img src={logo} alt="" style={{height: 30, marginTop:2}}/>
+                                    </Box>
+                                    :
+                                    <Typography variant="h4" noWrap component="div" color="primary" sx={{fontFamily:"Anton", padding: 1, display: {float: "left"}}}  >
+                                        D.com Daily Commit
+                                    </Typography>
+                            }
+                        </Box>
 
                         <Box sx={{ flexGrow: 1 }}/>
 
@@ -51,7 +56,7 @@ const TopNavigator = ({isMobile}) => {
                             <Menu
                                 anchorEl={anchorEl}
                                 id="account-menu"
-                                open={anchorEl}
+                                open={open}
                                 onClose={handleMenuClose}
                                 onClick={handleMenuClose}
                                 PaperProps={{
@@ -74,7 +79,7 @@ const TopNavigator = ({isMobile}) => {
                                             right: 14,
                                             width: 10,
                                             height: 10,
-                                            bgcolor: 'background.paper',
+                                            backgroundColor: 'background.paper',
                                             transform: 'translateY(-50%) rotate(45deg)',
                                             zIndex: 0,
                                         },

@@ -70,6 +70,8 @@ function* addUser(action) {
         const data = action.data;
         const res = yield call(addUsersAPI, data);
         const user = res.data;
+
+        console.log(user)
         yield put({type: UPDATE_ADD_USER, data: {user : user}})
     } catch (e) {
         console.error(e);
