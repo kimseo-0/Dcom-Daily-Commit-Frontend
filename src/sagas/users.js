@@ -47,7 +47,7 @@ function* fetchUsers(action) {
     try {
         const res = yield call(fetchUsersAPI);
         const users = res.data;
-        yield put({type: UPDATE_USERS, data: {users : users}})
+        yield put({type: UPDATE_USERS, data: {users : Object.values(users)}})
     } catch (e) {
         console.error(e);
         yield put({type: ERROR_USERS, data: {message : 'Error fetch error'}})
