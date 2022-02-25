@@ -135,7 +135,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="korName" label="Name" onChange={onChangeAccount} value={account.korName} focused={info.focus === "korName"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' error={!korNameValid || info.focus === "korName"}
-                                       helperText="한글 실명(1- 5자리)을 입력해주세요." />
+                                       helperText="한글 실명(1- 5자리)을 입력해주세요. ex) 홍길동" />
                         </Box>
                         <Box sx={{marginTop: 1, marginBottom: 2}}>
                             <Alert severity="info" sx={{fontFamily: "Anton"}}>
@@ -151,7 +151,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                             </Alert>
                             <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode} focused={info.focus === "userCode"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid || info.focus === "userCode"}
-                                       helperText="4자리 숫자를 입력해주세요."/>
+                                       helperText="4자리 숫자를 입력해주세요. ex) 1234"/>
                         </Box>
 
                         <Button onClick={submitForm} variant="contained" fullWidth disabled={addUserLoading || (!submitValid || !userCodeValid)}
