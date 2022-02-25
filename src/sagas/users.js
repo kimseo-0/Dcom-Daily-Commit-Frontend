@@ -5,20 +5,20 @@ import {
 } from '../reducers/users'
 import {call, takeEvery, all, fork, put} from "redux-saga/effects";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 
 function fetchUsersAPI() {
-    return axios.get('/api/fetch-user',
+    return axios.get('http://52.79.70.47:8080/api/fetch-user',
         {withCredentials: true});
 }
 
 function refreshUsersAPI() {
-    return axios.get('/api/refresh-user',
+    return axios.get('http://52.79.70.47:8080/api/refresh-user',
         {withCredentials: true});
 }
 
 function addUsersAPI(data) {
-    return axios.post('/api/register-user', null,
+    return axios.post('http://52.79.70.47:8080/api/register-user', null,
          {
             params: {
                 githubId: data.githubId,
@@ -31,7 +31,7 @@ function addUsersAPI(data) {
 }
 
 function deleteUsersAPI(data) {
-    return axios.post('/api/delete-user', null,
+    return axios.post('http://52.79.70.47:8080/api/delete-user', null,
          {
             params: {
                 githubId: data.githubId,

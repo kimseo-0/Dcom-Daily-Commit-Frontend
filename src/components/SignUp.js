@@ -10,7 +10,8 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
         korName: "",
     });
     const [submitValid, setSubmitValid] = useState(false);
-    const [userCodeValid, setUserCodeValid] = useState(false);
+    const [korNameValid, setKorNameValid] = useState(true);
+    const [userCodeValid, setUserCodeValid] = useState(true);
     const [openInfo, setOpenInfo] = React.useState(false);
 
     useEffect(() => {
@@ -22,8 +23,42 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
     },[info]);
 
     const onChangeAccount = (e) => {
-        if (e.target.id === 'userCode') {
-            if ( e.target.value.length === 4 ) {
+        const kor_regex = /[^(ㄱ-ㅎ|ㅏ-ㅣ|가-힣)]/;
+        const num_regex = /[^0-9]/;
+        if (e.target.id === 'korName') {
+            if (kor_regex.test(e.target.value)) {
+                setKorNameValid(false);
+            }
+            else if (e.target.value.length === 0) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value,
+                });
+                setKorNameValid(true);
+            }
+            else if ( e.target.value.length >= 1 && e.target.value.length <= 5 ) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value,
+                });
+                setKorNameValid(true);
+            }
+            else {
+                setKorNameValid(false);
+            }
+        }
+        else if (e.target.id === 'userCode') {
+            if (num_regex.test(e.target.value)) {
+                setKorNameValid(false);
+            }
+            else if (e.target.value.length === 0) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value,
+                });
+                setUserCodeValid(true);
+            }
+            else if ( e.target.value.length === 4 ) {
                 setAccount({
                     ...account,
                     [e.target.id]: e.target.value,
@@ -33,23 +68,25 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
             else if (e.target.value.length < 4) {
                 setAccount({
                     ...account,
-                    [e.target.id]: e.target.value.replace(/[^0-9]/g, ""),
+                    [e.target.id]: e.target.value,
                 });
                 setUserCodeValid(false);
             }
             else {
-                setUserCodeValid(true);
+                setUserCodeValid(false);
             }
-        } else {
+        }
+        else {
             setAccount({
                 ...account,
                 [e.target.id]: e.target.value,
             });
         }
+
         if (account.githubId !=='' && account.korName !== '' && account.userCode !== '' && account.accessCode !== '') {
             setSubmitValid(true)
         } else {
-            setSubmitValid(true)
+            setSubmitValid(false)
         }
     };
 
@@ -96,8 +133,9 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                         <Box sx={{marginTop: 1, marginBottom: 1}}>
                             <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount} focused={info.focus === "githubId"} error={info.focus === "githubId"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
-                            <TextField required id="korName" label="Name" onChange={onChangeAccount} focused={info.focus === "korName"} error={info.focus === "korName"}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary'/>
+                            <TextField required id="korName" label="Name" onChange={onChangeAccount} value={account.korName} focused={info.focus === "korName"}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!korNameValid || info.focus === "korName"}
+                                       helperText="한글 본명(1- 5자리)을 입력해주세요." />
                         </Box>
                         <Box sx={{marginTop: 1, marginBottom: 2}}>
                             <Alert severity="info" sx={{fontFamily: "Anton"}}>
@@ -112,7 +150,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                                 User Code는 암호화 되지 않고 관리자가 볼 수 있습니다.
                             </Alert>
                             <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode} focused={info.focus === "userCode"}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={(!userCodeValid && account.userCode.length !== 0) || info.focus === "userCode"}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid || info.focus === "userCode"}
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 

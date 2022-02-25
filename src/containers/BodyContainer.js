@@ -1,6 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {Box, Button, Grid, List, ListItemText, Typography, ButtonGroup, IconButton} from "@mui/material";
+import {
+    Box,
+    Button,
+    Grid,
+    List,
+    ListItemText,
+    Typography,
+    ButtonGroup,
+    IconButton,
+    TableRow,
+    TableCell, Avatar
+} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -60,6 +71,22 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         }
     };
 
+    const rules = [
+        '개인 계정에 1일 1커밋을 목표로 합니다.',
+        '개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다.',
+        '커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!',
+        '매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 1000원 입니다.',
+        '랭킹은 (연속 커밋일 * 10 + 총 커밋 * 5 - 남은 벌금 / 50)의 계산식으로 정해집니다.',
+        'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.'
+    ];
+    // const rulesRendering = () => {
+    //     const result = [];
+    //     for (let i = 0; i < rules.length; i++) {
+    //         result.push(<ListItemText sx={{textAlign: "left"}} primary={(i + 1) + '. ' + rules[i]}/>)
+    //     }
+    //     return result;
+    // }
+
     return (
         <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }} >
             <TopNavigator isMobile={IsMobile}/>
@@ -74,12 +101,10 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                             RULES
                         </Typography>
                         <List sx={{fontFamily: 'NanumGothicRegular'}}>
-                            <ListItemText sx={{textAlign: "left"}} primary="1. 개인 계정에 1일 1커밋을 목표로 합니다."/>
-                            <ListItemText sx={{textAlign: "left"}} primary="2. 개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다."/>
-                            <ListItemText sx={{textAlign: "left"}} primary="3. 커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!"/>
-                            <ListItemText sx={{textAlign: "left"}} primary="4. 매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 500원 입니다."/>
-                            <ListItemText sx={{textAlign: "left"}} primary="5. 귀찮아서/경조사/여행 기타 등등 사유 상관없이 빠지면 벌금입니다. 그냥 맘편하게 내세요!"/>
-                            <ListItemText sx={{textAlign: "left"}} primary="6. Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다."/>
+                            {rules.map((rule, index) =>
+                                <ListItemText key={index} sx={{textAlign: "left"}} primary={(index + 1) + '. ' + rule}/>
+                            )
+                            }
                         </List>
                     </Box>
 
