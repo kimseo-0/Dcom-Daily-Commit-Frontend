@@ -31,7 +31,7 @@ const RankTable = ({users, usersLoading}) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {users.map((user, index) => (
+                                {Object.values(users).map((user, index) => (
                                     <TableRow key={user.rank}>
                                         <TableCell component="th" scope="row" align='center' sx={{fontFamily:"NanumGothicRegular"}}>
                                             {index === 0 ?
