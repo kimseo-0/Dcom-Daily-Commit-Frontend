@@ -49,7 +49,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
         }
         else if (e.target.id === 'userCode') {
             if (num_regex.test(e.target.value)) {
-                setKorNameValid(false);
+                setUserCodeValid(false);
             }
             else if (e.target.value.length === 0) {
                 setAccount({

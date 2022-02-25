@@ -27,7 +27,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
         const num_regex = /[^0-9]/;
         if (e.target.id === 'userCode') {
             if (num_regex.test(e.target.value)) {
-                setKorNameValid(false);
+                setUserCodeValid(false);
             }
             else if (e.target.value.length === 0) {
                 setAccount({
