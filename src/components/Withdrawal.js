@@ -24,8 +24,19 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
     },[info]);
 
     const onChangeAccount = (e) => {
+        const num_regex = /[^0-9]/;
         if (e.target.id === 'userCode') {
-            if ( e.target.value.length === 4 ) {
+            if (num_regex.test(e.target.value)) {
+                setKorNameValid(false);
+            }
+            else if (e.target.value.length === 0) {
+                setAccount({
+                    ...account,
+                    [e.target.id]: e.target.value,
+                });
+                setUserCodeValid(true);
+            }
+            else if ( e.target.value.length === 4 ) {
                 setAccount({
                     ...account,
                     [e.target.id]: e.target.value,
@@ -35,19 +46,21 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
             else if (e.target.value.length < 4) {
                 setAccount({
                     ...account,
-                    [e.target.id]: e.target.value.replace(/[^0-9]/g, ""),
+                    [e.target.id]: e.target.value,
                 });
                 setUserCodeValid(false);
             }
             else {
-                setUserCodeValid(true);
+                setUserCodeValid(false);
             }
-        } else {
+        }
+        else {
             setAccount({
                 ...account,
                 [e.target.id]: e.target.value,
             });
         }
+
         if (account.githubId !==''&& account.userCode !== '') {
             setSubmitValid(true)
         } else {
@@ -99,7 +112,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
                             <TextField required id="githubId" label="GitHub ID" onChange={onChangeAccount} focused={info.focus === "githubId"} error={info.focus === "githubId"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="userCode" label="User Code" onChange={onChangeAccount} value={account.userCode} focused={info.focus === "userCode"}
-                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={(!userCodeValid && account.userCode.length !== 0) || info.focus === "userCode"}
+                                       variant="standard" fullWidth margin={"dense"} color='secondary' error={!userCodeValid || info.focus === "userCode"}
                                        helperText="4자리 숫자를 입력해주세요."/>
                         </Box>
 
