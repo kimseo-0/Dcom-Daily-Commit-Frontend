@@ -5,6 +5,48 @@ import {
 } from '@mui/material';
 
 const RankTable = ({users, usersLoading}) => {
+    const tableRendering = () => {
+        const result = [];
+        for (let i =0; i < users.length; i++) {
+            let user = users[i]
+            result.push(<TableRow key={user.rank}>
+                            <TableCell component="th" scope="row" align='center' sx={{fontFamily:"NanumGothicRegular"}}>
+                                {i === 0 ?
+                                    'TOP'
+                                    :
+                                    i + 1
+
+                                }
+                            </TableCell>
+                            <TableCell align="left" sx={{fontFamily:"NanumGothicRegular"}}>
+                                <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{ borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
+                                        startIcon={<Avatar alt={user.id} src={user.userImg} sx={{border:1, borderColor: 'background.light'}} />}>
+                                    {user.name}
+                                </Button>
+                            </TableCell>
+                            <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                { user.isCommitToday ?
+                                    parseInt(user.commitsInARow) + 1
+                                    :
+                                    user.commitsInARow
+                                }일
+                            </TableCell>
+                            <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                { user.isCommitToday ?
+                                    (parseInt(user.commitDayCount) + 1 )+ '/' + user.elapsedDay
+                                    :
+                                    user.commitDayCount + '/' + user.elapsedDay
+                                } 일
+                            </TableCell>
+                            <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
+                                {user.unpaidFine}원
+                            </TableCell>
+                            <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.paidFine}원</TableCell>
+                        </TableRow>)
+        }
+        return result;
+    }
+
     return (
         <Box sx={{}}>
             {
@@ -31,42 +73,7 @@ const RankTable = ({users, usersLoading}) => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Object.values(users).map((user, index) => (
-                                    <TableRow key={user.rank}>
-                                        <TableCell component="th" scope="row" align='center' sx={{fontFamily:"NanumGothicRegular"}}>
-                                            {index === 0 ?
-                                                'TOP'
-                                                :
-                                                index + 1
-
-                                            }
-                                        </TableCell>
-                                        <TableCell align="left" sx={{fontFamily:"NanumGothicRegular"}}>
-                                            <Button color="secondary" variant='text' onClick={() => {window.open("https://github.com/" + user.id)}} sx={{ borderRadius: 6, '&:hover' : {backgroundColor : 'background.light'}}}
-                                                    startIcon={<Avatar alt={user.id} src={user.userImg} sx={{border:1, borderColor: 'background.light'}} />}>
-                                                {user.name}
-                                            </Button>
-                                        </TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
-                                            { user.isCommitToday ?
-                                                parseInt(user.commitsInARow) + 1
-                                                :
-                                                user.commitsInARow
-                                            }일
-                                        </TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
-                                            { user.isCommitToday ?
-                                                (parseInt(user.commitDayCount) + 1 )+ '/' + user.elapsedDay
-                                                :
-                                                user.commitDayCount + '/' + user.elapsedDay
-                                            } 일
-                                        </TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>
-                                            {user.unpaidFine}원
-                                        </TableCell>
-                                        <TableCell align="center" sx={{fontFamily:"NanumGothicRegular"}}>{user.paidFine}원</TableCell>
-                                    </TableRow>
-                                ))}
+                                {tableRendering()}
                             </TableBody>
                         </Table>
                         </TableContainer>
