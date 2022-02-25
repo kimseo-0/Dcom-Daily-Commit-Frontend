@@ -135,7 +135,7 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                                        variant="standard" fullWidth margin={"dense"} color='secondary' />
                             <TextField required id="korName" label="Name" onChange={onChangeAccount} value={account.korName} focused={info.focus === "korName"}
                                        variant="standard" fullWidth margin={"dense"} color='secondary' error={!korNameValid || info.focus === "korName"}
-                                       helperText="한글 본명(1- 5자리)을 입력해주세요." />
+                                       helperText="한글 실명(1- 5자리)을 입력해주세요." />
                         </Box>
                         <Box sx={{marginTop: 1, marginBottom: 2}}>
                             <Alert severity="info" sx={{fontFamily: "Anton"}}>

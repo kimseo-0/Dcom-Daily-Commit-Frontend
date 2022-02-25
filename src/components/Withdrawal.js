@@ -12,7 +12,7 @@ const Withdrawal = ({info, open, handleClose, deleteUser, deleteUserLoading}) =>
     });
     const [checked, setChecked] = useState(false);
     const [submitValid, setSubmitValid] = useState(false);
-    const [userCodeValid, setUserCodeValid] = useState(false);
+    const [userCodeValid, setUserCodeValid] = useState(true);
     const [openInfo, setOpenInfo] = useState(false);
 
     useEffect(() => {
