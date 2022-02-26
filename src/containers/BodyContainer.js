@@ -34,10 +34,41 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
     const [openInfo, setOpenInfo] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
     const [openDeleteUser, setOpenDeleteUser] = useState(false);
+    const [updateValid, setUpdateValid] = useState(true);
+    const [updateClock, setUpdateClock] = useState(60);
     const IsMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
+
+    const setTimeCookie = () => {
+        let todayDate = new Date();
+        todayDate.setMinutes(todayDate.getMinutes() + 1);
+        document.cookie = "expireTime=" + todayDate + ";"
+    }
+
+    const getTimeCookie = () => {
+        let result = null;
+        let cookie = document.cookie.split(';');
+        cookie.some((item) => {
+            item = item.replace(' ', '');
+
+            let dic = item.split('=');
+            if ("expireTime" === dic[0]) {
+                result = dic[1];
+                return true;
+            }
+        });
+        return new Date(result);
+    }
 
     useEffect(() => {
         fetchUsers()
+        // const now = new Date();
+        // const expireTime = getTimeCookie()
+        // if ((expireTime !== null) && (now.getTime() < expireTime.getTime())) {
+        //     setUpdateValid(false);
+        //     setUpdateClock((expireTime.getTime() - now.getTime()) * 60);
+        // } else {
+        //     setUpdateValid(true);
+        // }
     },[]);
 
     useEffect(() => {
@@ -49,6 +80,21 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
             }
         }
     },[info]);
+
+    const updateTable = () => {
+        const now = new Date();
+        const expireTime = getTimeCookie()
+        if ((expireTime === null) || (now.getTime() > expireTime.getTime())) {
+            setTimeCookie()
+            refreshUsers();
+            setUpdateValid(false);
+            setInterval(() =>
+            {
+                setUpdateClock(updateTimer(updateClock));
+                console.log(updateClock);
+            }, 1000 );
+        }
+    }
 
     const handleOpen = (type) => {
         if(type === 'SignUp') {
@@ -71,6 +117,18 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         }
     };
 
+    const updateTimer = (clock) => {
+        if (clock === 0) {
+            setUpdateValid(true);
+            // setUpdateClock(60);
+            return 60
+        } else {
+            setUpdateValid(false);
+            // setUpdateClock(clock - 1);
+            return clock - 1
+        }
+    }
+
     const rules = [
         '개인 계정에 1일 1커밋을 목표로 합니다.',
         '개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다.',
@@ -79,13 +137,6 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         '랭킹은 (연속 커밋일 * 10 + 총 커밋 * 5 - 남은 벌금 / 50)의 계산식으로 정해집니다.',
         'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.'
     ];
-    // const rulesRendering = () => {
-    //     const result = [];
-    //     for (let i = 0; i < rules.length; i++) {
-    //         result.push(<ListItemText sx={{textAlign: "left"}} primary={(i + 1) + '. ' + rules[i]}/>)
-    //     }
-    //     return result;
-    // }
 
     return (
         <Box sx={{ width: "auto", height: "auto", backgroundColor: 'background.main' }} >
@@ -116,17 +167,20 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                         </Typography>
 
                         <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
-                            {
-                                !IsMobile
+                            <Button onClick={updateTable} disabled={!updateValid} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}}
+                                    startIcon={!IsMobile ? <RefreshIcon/> : null} >
+                                {
+                                    !updateValid
                                     ?
-                                    <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}} startIcon={<RefreshIcon/>} >
-                                        새로고침
-                                    </Button>
+                                        updateClock
                                     :
-                                    <Button onClick={refreshUsers} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}}>
-                                        <RefreshIcon/>
-                                    </Button>
-                            }
+                                        !IsMobile
+                                            ?
+                                            "업데이트"
+                                            :
+                                            <RefreshIcon/>
+                                }
+                            </Button>
                             <ButtonGroup sx={{float: "right"}} variant='outlined'>
                                 {
                                     !IsMobile

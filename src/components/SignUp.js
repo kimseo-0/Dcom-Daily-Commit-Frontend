@@ -119,7 +119,6 @@ const SignUp = ({info, open, handleClose, addUser, addUserLoading}) => {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent dividers sx={{padding: 1}}>
-
                     <Box
                         component="form" noValidate autoComplete="off" maxWidth="sm"
                         sx={{ margin: 4, marginTop: 0, marginBottom: 2, width: {sm : 450}}} >
