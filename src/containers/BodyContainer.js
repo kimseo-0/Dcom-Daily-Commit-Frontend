@@ -34,41 +34,10 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
     const [openInfo, setOpenInfo] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
     const [openDeleteUser, setOpenDeleteUser] = useState(false);
-    const [updateValid, setUpdateValid] = useState(true);
-    const [updateClock, setUpdateClock] = useState(60);
     const IsMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
-
-    const setTimeCookie = () => {
-        let todayDate = new Date();
-        todayDate.setMinutes(todayDate.getMinutes() + 1);
-        document.cookie = "expireTime=" + todayDate + ";"
-    }
-
-    const getTimeCookie = () => {
-        let result = null;
-        let cookie = document.cookie.split(';');
-        cookie.some((item) => {
-            item = item.replace(' ', '');
-
-            let dic = item.split('=');
-            if ("expireTime" === dic[0]) {
-                result = dic[1];
-                return true;
-            }
-        });
-        return new Date(result);
-    }
 
     useEffect(() => {
         fetchUsers()
-        // const now = new Date();
-        // const expireTime = getTimeCookie()
-        // if ((expireTime !== null) && (now.getTime() < expireTime.getTime())) {
-        //     setUpdateValid(false);
-        //     setUpdateClock((expireTime.getTime() - now.getTime()) * 60);
-        // } else {
-        //     setUpdateValid(true);
-        // }
     },[]);
 
     useEffect(() => {
@@ -81,20 +50,6 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         }
     },[info]);
 
-    const updateTable = () => {
-        const now = new Date();
-        const expireTime = getTimeCookie()
-        if ((expireTime === null) || (now.getTime() > expireTime.getTime())) {
-            setTimeCookie()
-            refreshUsers();
-            setUpdateValid(false);
-            setInterval(() =>
-            {
-                setUpdateClock(updateTimer(updateClock));
-                console.log(updateClock);
-            }, 1000 );
-        }
-    }
 
     const handleOpen = (type) => {
         if(type === 'SignUp') {
@@ -117,25 +72,14 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         }
     };
 
-    const updateTimer = (clock) => {
-        if (clock === 0) {
-            setUpdateValid(true);
-            // setUpdateClock(60);
-            return 60
-        } else {
-            setUpdateValid(false);
-            // setUpdateClock(clock - 1);
-            return clock - 1
-        }
-    }
-
     const rules = [
         '개인 계정에 1일 1커밋을 목표로 합니다.',
         '개인 프로젝트/알고리즘/블로깅 등 어떤 커밋이든지 상관 없습니다.',
         '커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!',
         '매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 1000원 입니다.',
         '랭킹은 (연속 커밋일 * 10 + 총 커밋 * 5 - 남은 벌금 / 50)의 계산식으로 정해집니다.',
-        'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.'
+        'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.',
+        '하루의 기준은 "오늘 09:01 ~ 다음날 09:00" 입니다.'
     ];
 
     return (
@@ -166,44 +110,32 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                             RANKING
                         </Typography>
 
+                        <Box sx={{fontFamily: 'NanumGothicRegular'}}>
+                            5분마다 자동 갱신 됩니다.
+                        </Box>
+
                         <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
-                            <Button onClick={updateTable} disabled={!updateValid} variant="outlined" color="success" sx={{float: "left", fontFamily: 'NanumGothicBold'}}
-                                    startIcon={!IsMobile ? <RefreshIcon/> : null} >
-                                {
-                                    !updateValid
-                                    ?
-                                        updateClock
-                                    :
+                            <ButtonGroup sx={{float: "right"}} variant='outlined'>
+                                <Button  color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}}
+                                         endIcon={!IsMobile ? <AddOutlinedIcon/> : null} >
+                                    {
                                         !IsMobile
                                             ?
-                                            "업데이트"
+                                            "사용자 등록"
                                             :
-                                            <RefreshIcon/>
-                                }
-                            </Button>
-                            <ButtonGroup sx={{float: "right"}} variant='outlined'>
-                                {
-                                    !IsMobile
-                                        ?
-                                        <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<AddOutlinedIcon/>}>
-                                            사용자 등록
-                                        </Button>
-                                        :
-                                        <Button color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}}>
                                             <PersonAddAlt1Icon/>
-                                        </Button>
-                                }
-                                {
-                                    !IsMobile
-                                        ?
-                                        <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} endIcon={<RemoveOutlinedIcon/>} >
-                                            사용자 제거
-                                        </Button>
-                                        :
-                                        <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}} >
+                                    }
+                                </Button>
+                                <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}}
+                                         endIcon={!IsMobile ? <RemoveOutlinedIcon/> : null} >
+                                    {
+                                        !IsMobile
+                                            ?
+                                            "사용자 제거"
+                                            :
                                             <PersonRemoveAlt1Icon/>
-                                        </Button>
-                                }
+                                    }
+                                </Button>
                             </ButtonGroup>
                         </Box>
 
