@@ -1,7 +1,6 @@
 import produce from 'immer';
 
 export const FETCH_USERS = "FETCH_USERS";
-export const REFRESH_USERS = "REFRESH_USERS";
 export const ADD_USER = "ADD_USER";
 export const DELETE_USER = "DELETE_USER";
 
@@ -28,11 +27,6 @@ const initialState = {
 function users(state = initialState, action) {
     switch (action.type) {
         case FETCH_USERS:
-            return produce(state, draft => {
-                draft.info = {type: null, message: null}
-                draft.usersLoading = true
-            });
-        case REFRESH_USERS:
             return produce(state, draft => {
                 draft.info = {type: null, message: null}
                 draft.usersLoading = true

@@ -12,11 +12,6 @@ function fetchUsersAPI() {
         {withCredentials: true});
 }
 
-function refreshUsersAPI() {
-    return axios.get('http://52.79.70.47:8080/api/refresh-user',
-        {withCredentials: true});
-}
-
 function addUsersAPI(data) {
     return axios.post('http://52.79.70.47:8080/api/register-user', null,
          {
@@ -51,17 +46,6 @@ function* fetchUsers(action) {
     } catch (e) {
         console.error(e);
         yield put({type: ERROR_USERS, data: {message : 'Error fetch error'}})
-    }
-}
-
-function* refreshUsers(action) {
-    try {
-        const res = yield call(refreshUsersAPI);
-        const users = res.data;
-        yield put({type: UPDATE_USERS, data: {users : users}})
-    } catch (e) {
-        console.error(e);
-        yield put({type: ERROR_USERS, data: {message : 'Error refresh error'}})
     }
 }
 
@@ -112,10 +96,6 @@ function* fetchUsersWatch() {
     yield takeEvery("FETCH_USERS", fetchUsers);
 }
 
-function* refreshUsersWatch() {
-    yield takeEvery("REFRESH_USERS", refreshUsers);
-}
-
 function* addUserWatch() {
     yield takeEvery("ADD_USER", addUser);
 }
@@ -128,7 +108,6 @@ function* deleteUserWatch() {
 export default function* userSaga() {
     yield all([
         fork(fetchUsersWatch),
-        fork(refreshUsersWatch),
         fork(addUserWatch),
         fork(deleteUserWatch)
     ])

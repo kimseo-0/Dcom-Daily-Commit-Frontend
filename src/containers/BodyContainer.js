@@ -1,17 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import {
-    Box,
-    Button,
-    Grid,
-    List,
-    ListItemText,
-    Typography,
-    ButtonGroup,
-    IconButton,
-    TableRow,
-    TableCell, Avatar
-} from "@mui/material";
+import { Box, Button, Grid, List, ListItemText, Typography, ButtonGroup } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -20,7 +9,7 @@ import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonRemoveAlt1Icon from '@mui/icons-material/PersonRemoveAlt1';
 
-import {REFRESH_USERS, ADD_USER, DELETE_USER, FETCH_USERS, CLEAR_INFO} from "../reducers/users";
+import {ADD_USER, DELETE_USER, FETCH_USERS, CLEAR_INFO} from "../reducers/users";
 
 import Offset from "../components/Offset";
 import RankTable from "../components/RankTable";
@@ -30,7 +19,7 @@ import SignUp from "../components/SignUp";
 import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
-const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, refreshUsers, addUser, deleteUser, clearInfo}) => {
+const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, addUser, deleteUser, clearInfo}) => {
     const [openInfo, setOpenInfo] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
     const [openDeleteUser, setOpenDeleteUser] = useState(false);
@@ -106,37 +95,40 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                     <Offset id="ranking"/>
 
                     <Box sx={{padding: 2}}>
-                        <Typography variant="h4" noWrap component="div" color="secondary" sx={{fontFamily:"Anton"}} >
-                            RANKING
-                        </Typography>
+                        <Box sx={{ display: 'block', overflow: "hidden"}}>
+                            <Typography variant="h4" noWrap component="div" color="secondary" sx={{fontFamily:"Anton"}} >
+                                RANKING
+                            </Typography>
 
-                        <Box sx={{fontFamily: 'NanumGothicRegular'}}>
-                            5분마다 자동 갱신 됩니다.
-                        </Box>
+                            <Button  color="secondary" variant='text' disableRipple sx={{fontFamily: 'NanumGothicRegular', paddingTop: 2, cursor: 'default' ,'&:hover': {backgroundColor: 'transparent'}, 'background-color': 'transparent', 'transition': "none",}}
+                                     startIcon={<RefreshIcon/>} >
+                                5분마다 자동 갱신 됩니다.
+                            </Button>
 
-                        <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
-                            <ButtonGroup sx={{float: "right"}} variant='outlined'>
-                                <Button  color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}}
-                                         endIcon={!IsMobile ? <AddOutlinedIcon/> : null} >
-                                    {
-                                        !IsMobile
-                                            ?
-                                            "사용자 등록"
-                                            :
-                                            <PersonAddAlt1Icon/>
-                                    }
-                                </Button>
-                                <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}}
-                                         endIcon={!IsMobile ? <RemoveOutlinedIcon/> : null} >
-                                    {
-                                        !IsMobile
-                                            ?
-                                            "사용자 제거"
-                                            :
-                                            <PersonRemoveAlt1Icon/>
-                                    }
-                                </Button>
-                            </ButtonGroup>
+                            <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
+                                <ButtonGroup sx={{float: "right"}} variant='outlined'>
+                                    <Button  color="add" variant='outlined' onClick={() => {handleOpen('SignUp')}} sx={{fontFamily: 'NanumGothicBold'}}
+                                             endIcon={!IsMobile ? <AddOutlinedIcon/> : null} >
+                                        {
+                                            !IsMobile
+                                                ?
+                                                "사용자 등록"
+                                                :
+                                                <PersonAddAlt1Icon/>
+                                        }
+                                    </Button>
+                                    <Button  color="delete" variant='outlined' onClick={() => {handleOpen('DeleteUser')}} sx={{fontFamily: 'NanumGothicBold'}}
+                                             endIcon={!IsMobile ? <RemoveOutlinedIcon/> : null} >
+                                        {
+                                            !IsMobile
+                                                ?
+                                                "사용자 제거"
+                                                :
+                                                <PersonRemoveAlt1Icon/>
+                                        }
+                                    </Button>
+                                </ButtonGroup>
+                            </Box>
                         </Box>
 
                         <RankTable users={users} usersLoading={usersLoading}/>
@@ -172,10 +164,6 @@ const mapDispatchToProps = dispatch => ({
     fetchUsers: () => {
         console.log('fetchUsers')
         dispatch({type : FETCH_USERS})
-    },
-    refreshUsers: () => {
-        console.log('refreshUsers');
-        dispatch({type : REFRESH_USERS})
     },
     addUser: (data) => {
         console.log('addUsers');
