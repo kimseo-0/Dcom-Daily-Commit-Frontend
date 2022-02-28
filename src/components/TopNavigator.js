@@ -54,11 +54,8 @@ const TopNavigator = ({isMobile}) => {
                                 <MenuIcon/>
                             </IconButton>
                             <Menu
-                                anchorEl={anchorEl}
-                                id="account-menu"
-                                open={open}
-                                onClose={handleMenuClose}
-                                onClick={handleMenuClose}
+                                anchorEl={anchorEl} id="account-menu"
+                                open={open} onClose={handleMenuClose} onClick={handleMenuClose}
                                 PaperProps={{
                                     elevation: 0,
                                     sx: {
