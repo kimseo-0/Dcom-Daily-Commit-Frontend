@@ -45,7 +45,7 @@ function* fetchUsers(action) {
         yield put({type: UPDATE_USERS, data: {users : users}})
     } catch (e) {
         console.error(e);
-        yield put({type: ERROR_USERS, data: {message : 'Error fetch error'}})
+        yield put({type: ERROR_USERS, data: {message : 'Error : server error.'}})
     }
 }
 
@@ -68,6 +68,8 @@ function* addUser(action) {
             yield put({type: ERROR_SIGN_UP, data: {message : '이미 존재하는 Github Id 입니다.', focus: 'githubId'}});
         } else if (data.code === 'COM-001') {
             yield put({type: ERROR_SIGN_UP, data: {message : '잘못된 입력 입니다.', focus: 'userCode'}});
+        } else {
+            yield put({type: ERROR_SIGN_UP, data: {message : 'Error : server error.', focus: ''}});
         }
     }
 }
@@ -87,6 +89,8 @@ function* deleteUser(action) {
             yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 User Code 입니다.', focus: 'userCode'}});
         } else if (data.code === 'COM-001') {
             yield put({type: ERROR_DELETE_USER, data: {message : '잘못된 입력 입니다.', focus: 'userCode'}});
+        } else {
+            yield put({type: ERROR_DELETE_USER, data: {message : 'Error : server error.', focus: ''}});
         }
     }
 }
