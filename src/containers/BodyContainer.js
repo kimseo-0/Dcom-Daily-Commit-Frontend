@@ -67,8 +67,7 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
         '커밋은 절대 강요하거나 눈치주지 않습니다. 오직 벌금만 강요합니다!',
         '매주 일요일마다 집계 (일-토 기준), 커밋 한번 빠졌을 때마다 벌금 1000원 입니다.',
         '랭킹은 (연속 커밋일 * 10 + 총 커밋 * 5 - 남은 벌금 / 50)의 계산식으로 정해집니다.',
-        'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.',
-        '하루의 기준은 "오늘 09:01 ~ 다음날 09:00" 입니다.'
+        'Private Repository에 커밋했다면 Contribution Setting을 바꾸어 주어야 본 페이지에 반영됩니다.'
     ];
 
     return (
