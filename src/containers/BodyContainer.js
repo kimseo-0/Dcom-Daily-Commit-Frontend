@@ -100,7 +100,7 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
                             </Typography>
 
                             <Button  color="secondary" variant='text' disableRipple sx={{fontFamily: 'NanumGothicRegular', paddingTop: 2, cursor: 'default' ,'&:hover': {backgroundColor: 'transparent'}, 'background-color': 'transparent', 'transition': "none",}}>
-                                ※ 5분마다 자동 갱신 됩니다.
+                                ※ 커밋 여부는 5분마다, 랭킹은 매일 자정에 업데이트 됩니다.
                             </Button>
 
                             <Box sx={{paddingTop: 2, paddingBottom: 2, display: 'block', overflow: "hidden"}} >
