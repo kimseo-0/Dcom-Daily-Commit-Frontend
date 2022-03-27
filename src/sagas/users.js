@@ -8,12 +8,12 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 function fetchUsersAPI() {
-    return axios.get('http://52.79.70.47:8080/api/fetch-user',
+    return axios.get('http://49.247.146.181:8080/api/fetch-user',
         {withCredentials: true});
 }
 
 function addUsersAPI(data) {
-    return axios.post('http://52.79.70.47:8080/api/register-user', null,
+    return axios.post('http://49.247.146.181:8080/api/register-user', null,
          {
             params: {
                 githubId: data.githubId,
@@ -26,7 +26,7 @@ function addUsersAPI(data) {
 }
 
 function deleteUsersAPI(data) {
-    return axios.post('http://52.79.70.47:8080/api/delete-user', null,
+    return axios.post('http://49.247.146.181:8080/api/delete-user', null,
          {
             params: {
                 githubId: data.githubId,
