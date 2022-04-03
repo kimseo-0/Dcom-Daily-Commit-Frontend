@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {connect} from "react-redux";
 import {AppBar, Box, Typography, Toolbar, Button, Grid, IconButton, Menu, MenuItem} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import logo from '../logo192.png'
-
 
 const TopNavigator = ({isMobile}) => {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -118,10 +116,4 @@ const TopNavigator = ({isMobile}) => {
     );
 }
 
-function StateToProps(state){
-    return {
-        state : state
-    }
-}
-
-export default connect(StateToProps)(TopNavigator);
+export default TopNavigator;
