@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {createTheme, ThemeProvider} from "@mui/material/styles";
-import BodyContainer from "./BodyContainer";
+import BodyContainer from "../pages/main";
 
 const theme = createTheme({
     palette: {
