@@ -37,6 +37,11 @@ const BottomNavigator = () => {
                         kimseo-0
                     </Link>
                 </Typography>
+                <Box sx={{padding: 2}}>
+                    <Link underline="hover" sx={{marginLeft: 1, color: 'secondary.main', fontFamily: 'NanumGothicRegular'}}  href="/admin">
+                        관리자 페이지
+                    </Link>
+                </Box>
             </Box>
         </Box>
     );
