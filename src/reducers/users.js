@@ -21,7 +21,9 @@ const initialState = {
     usersLoading: true,
     addUserLoading: false,
     deleteUserLoading: false,
-    users: []
+    users: [],
+
+    isLoginAdmin: true
 }
 
 function users(state = initialState, action) {
