@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { Box, Button, Grid, List, ListItemText, Typography, ButtonGroup } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -19,15 +18,11 @@ import SignUp from "../components/SignUp";
 import Withdrawal from "../components/Withdrawal";
 import Info from "../components/Info";
 
-const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, addUser, deleteUser, clearInfo}) => {
+const Main = ({ info, signUpInfo, deleteUserInfo, users, usersLoading, addUserLoading, deleteUserLoading, fetchUsers, addUser, deleteUser, clearInfo}) => {
     const [openInfo, setOpenInfo] = useState(false);
     const [openSignUp, setOpenSignUp] = useState(false);
     const [openDeleteUser, setOpenDeleteUser] = useState(false);
     const IsMobile = useMediaQuery(useTheme().breakpoints.down('sm'))
-
-    useEffect(() => {
-        fetchUsers()
-    },[]);
 
     useEffect(() => {
         if (info.type !== null) {
@@ -38,7 +33,6 @@ const BodyContainer = ({ info, signUpInfo, deleteUserInfo,users, usersLoading, a
             }
         }
     },[info]);
-
 
     const handleOpen = (type) => {
         if(type === 'SignUp') {
@@ -154,8 +148,7 @@ const mapStateToProps = state => ({
     deleteUserInfo : state.user.deleteUserInfo,
     usersLoading : state.user.usersLoading,
     addUserLoading: state.user.addUserLoading,
-    deleteUserLoading: state.user.deleteUserLoading,
-    users: state.user.users,
+    deleteUserLoading: state.user.deleteUserLoading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -180,4 +173,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(BodyContainer);
+)(Main);
